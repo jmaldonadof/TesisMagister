@@ -1,0 +1,264 @@
+\chapter{Marco Teórico}
+\label{cap:marco}
+
+En este capítulo se desarrolla el marco teórico que sustenta la base del trabajo expuesto en este documento. En la sección \ref{sec:glosario} se definen los conceptos sismológicos y técnicos que se mencionan a lo largo de este documento y que es necesario manejar para comprender los desafíos y alcances del trabajo realizado. En la sección \ref{sec:metricassis} y \ref{sec:metricasir} se explican brevemente las métricas utilizadas para la medición de sismos y para el análisis de los resultados respectivamente. 
+
+El trabajo desarrollado en esta tesis se relaciona con áreas como detección de eventos usando redes sociales y con el uso de redes sociales en momentos de crisis, en particular durante eventos sísmicos. En relación a estos tópicos hay diversos estudios que demuestran la utilidad de usar los datos proporcionados por las redes de \textit{microblog} como Twitter. En las secciones \ref{sec:deteccioneventos} se mencionan algunos estudios que representan el estado del arte en el uso de redes sociales para la detección de eventos y en la sección \ref{sec:desastres} se mencionan otros estudios relacionados al uso de las redes sociales durante situaciones de crisis. 
+En la sección \ref{sec:deteccionsismos} se profundiza en el estado del arte del uso de redes sociales para la detección y monitoreo de sismos específicamente. Finalmente por completitud, en la sección \ref{sec:otroscasos}, se mencionan algunos casos de estudio en los que se analizaron datos recolectados durante sismos pero cuyo objetivo no es la detección de sismos de forma temprana. 
+
+\section{Definiciones}
+\label{sec:glosario}
+
+\begin{description}
+\item[Agencia sismológica:] Existen varias agencias sismológicas operando actualmente en la Red Mundial, teniendo cada una de ellas una clave con la cual es identificada. Algunas de ellas son: GUC: Geophysics, University of Chile (CHILE). NEIC: National Earthquake Information Center (USA). HRV: Harvard Seismology (USA).\cite{csnglosary}
+
+\item[Catálogo de sismos:] Listado detallado de información instrumental de eventos detectados por los sensores de una agencia sismológica.\cite{csnglosary}
+
+\item[Crowdsourcing:] Pedir la opinión de terceros frente a algún tema en particular o el desarrollo de una tarea específica que realizaban los empleados, dejándolas a cargo de un grupo numeroso de personas a través de una convocatoria abierta; el Crowdsourcing nos permite, como por ejemplo, resolver un problema a través de una comunidad, ya sea de trabajo o del entorno.\cite{crowddefinicion}
+
+\item[Distancia epicentral:] Distancia entre un observador o una estación sismológica y el epicentro de un sismo, medida sobre la superficie de la Tierra.\cite{csnglosary}
+
+\item[Enjambres sísmicos:] En algunas regiones se producen una serie de temblores que no están asociados con ningún terremoto mayor. A estas series se les llama "enjambres sísmicos". Estos son comunes en las regiones volcánicas, pero también suceden en otras regiones no asociadas a la actividad volcánica, por ejemplo, Copiapó en 1973.\cite{csnglosary}
+
+\item[Epicentro:] El punto en la superficie de la Tierra ubicado directamente sobre el foco o hipocentro.\cite{csnglosary}
+
+\item[Escala:] Relación entre cualquier magnitud (distancia o superficie) medida en el plano y la homóloga en terreno, dicha relación es variable de un plano a otro, pero constante, cualquiera sea la dirección que se tome en un mismo plano.\cite{csnglosary}
+
+\item[Falla Geográfica:] Es la superficie de contacto entre dos bloques que se desplazan en forma diferencial uno con respecto al otro. Se pueden extender espacialmente por varios cientos de km.\cite{csnglosary}
+
+\item[Hashtag:] Un hashtag es cualquier palabra o frase precedida directamente por el símbolo \#. Cuando pulses o hagas clic en un hashtag, verás todos los demás Tweets que incluyen esa palabra clave o tema.\cite{twitterglosary}
+
+\item[Hipocentro o foco:] El punto en el interior de la Tierra, en el cual se da inicio a la ruptura que genera un sismo.\cite{csnglosary}
+
+\item[Intensidad:] Es una medida de los efectos producidos por un sismo en personas, animales, estructuras y terreno en un lugar particular. Existen varias escalas de intensidad. En Chile se utiliza la Escala de Intensidades de Mercalli Modificada (Wood y Neumann, 1931). En esta escala, los valores de intensidad se denotan con números romanos que clasifica los efectos sísmicos con doce niveles ascendentes en severidad (ver escala). La intensidad no sólo depende de la fuerza del sismo (magnitud) sino que también de la distancia epicentral, la geología local, la naturaleza del terreno y el tipo de construcciones del lugar.\cite{csnglosary}
+
+\item[Magnitud:] Es una medida que tiene relación con la cantidad de energía liberada en forma de ondas. Se puede considerar como un tamaño relativo de un temblor y se determina tomando el logaritmo (base 10) de la amplitud máxima de movimiento de algún tipo de onda (P, Superficial) a la cual se le aplica una corrección por distancia epicentral y profundidad focal. En oposición a la intensidad, un sismo posee solamente una medida de magnitud y varias observaciones de intensidad.\cite{csnglosary}
+
+\item[Microblog:] Servicio que permite a sus usuarios enviar y publicar cualquier tipo de mensajes breves, que contengan generalmente solo texto.\cite{microbloggingwiki}
+
+\item[Réplicas:] Después que se produce un terremoto grande, es posible esperar que ocurran muchos sismos de menor tamaño, en la vecindad de la zona de ruptura asociada al sismo principal. A estos pequeños temblores se les denomina réplicas. Algunas series de réplicas duran largo tiempo, incluso superan el lapso de un año (para los eventos de Alaska 1964, Chile 1960). La zona que cubre los epicentros de las réplicas se llama \textit{área de réplicas} y sus dimensiones, principalmente de las réplicas tempranas (uno a tres días de ocurrido el evento), son una indicación del tamaño de la falla asociada con el terremoto principal.\cite{csnglosary}
+
+\item[Retweet:] Se denomina Retweet a un Tweet que reenvías a tus seguidores. Generalmente, se usan para compartir noticias y demás contenido interesante publicado en Twitter, y siempre mantienen su atribución original.\cite{twitterglosary}
+
+\item[Sensor Sísmico:] Sensor utilizado para detectar las vibraciones de la tierra.\cite{csnglosary} Los tipos de sensores sísmicos son:
+	\begin{itemize}
+	\item Sensor de Periodo Corto: Instrumento Sismológico que permite detectar sismos locales.
+	\item Sensor de Periodo Largo: Instrumento Sismológico que permite detectar sismos de origen lejano (distancia mayor a 1000 Km).
+	\item Sensor de Banda Ancha: Instrumento sismológico que permite registrar sismos en un amplio rango de frecuencias. Esta característica le permite detectar ondas sísmicas producidas tanto por sismos de muy alta frecuencia (70 Hz) hasta períodos del orden de cientos de segundos.
+	\item Acelerómetro: Mide las aceleraciones generadas por un sismo local sobre la superficie de la tierra.
+	\end{itemize}
+	
+\item[Sismo:] Corresponde al proceso de generación de ondas y su posterior propagación por el interior de la Tierra. Al llegar a la superficie de la Tierra, estas ondas se dejan sentir tanto por la población como por estructuras, y dependiendo de la amplitud del movimiento (desplazamiento, velocidad y aceleración del suelo) y de su duración, el sismo producirá mayor o menor intensidad.\cite{csnglosary}
+
+\item[Tweet:] Mensaje enviado usando Twitter, de un máximo de 280 caracteres. Un Tweet puede contener fotos, GIF, videos y texto.\cite{twitterglosary}
+
+\end{description}
+
+
+\section{Métricas Sismológicas}
+\label{sec:metricassis}
+\begin{description}
+\item[Magnitud Local (Ml):] Es una representación de la amplitud máxima de las ondas. Se basa en la fórmula propuesta por Charles Francis Richter en 1934 y funciona bien para sismos menores a 6 en escala Richter.\cite{csnglosary}
+
+\item[Magnitud de Momento (MW):] Es una escala logarítimica utilizada para la comparación de sismos. Esta fue concebida para ser utilizada con sismos mas grandes, en donde la fórmula de Richter no logra dimensionar el tamaño correctamente. Fue introducida en 1979 por Thomas C. Hanks y Hiroo Kanamori como la sucesora de la escala sismológica de Richter.\cite{csnglosary}
+
+\item[Escala de Mercalli Modificada:] Es una escala de doce grados que mide la intensidad registrada en un lugar específico. Para un mismo temblor habitualmente se reportan varias intensidades las en general decrecen a medida que la distancia epicentral aumenta.\cite{csnglosary}
+\end{description}
+
+\section{Métricas de \textit{Information Retrieval}}
+\label{sec:metricasir}
+
+Las definiciones breves listadas a continuación fueron obtenidas del libro \textit{Encyclopedia of Machine Learning}\cite{encyclopediaml}.
+
+\begin{description}
+\item[Recall:] También se conoce como exhaustividad o sensibilidad. Corresponde a la cantidad de detecciones correctamente efectuadas sobre el total de sismos del catálogo. La formula utilizada para el cálculo de esta métrica es:  
+\[recall = \frac{TP}{TP + FN}\]
+
+\item[Precision:] También conocida como el valor predictivo. Corresponde a la cantidad de detecciones correctamente efectuadas sobre el total de detecciones efectuadas. La fórmula utilizada para el cálculo de esta métrica es: 
+\[presicion = \frac{TP}{TP + FP}\]
+
+\item[F-measure:] El valor-F se considera como una media armónica que combina los valores de la precisión y del \textit{recall}. De tal forma que: 
+\[f-measure = 2*\frac{recall * presicion}{recall + presicion}\]
+\end{description}
+
+
+\section{Detección de eventos emergentes en redes sociales}
+\label{sec:deteccioneventos}
+
+Hay varios enfoques para detectar eventos emergentes usando microblogs, tales como los presentados por Kleinberg et al.~\cite{kleinberg2003bursty}, Nguyen et al.~\cite{nguyen2013event} y Weng et al.~\cite{weng2011event}.
+%
+Algunos de ellos requieren que periódicamente se reajusten parámetros. Este es el caso de Mathioudakis y Koudas, quienes presentaron Twitter Monitor~\cite{mathioudakis2010twittermonitor}, un sistema que detecta tendencias en el {\em stream} de Twitter en base a palabras clave.
+%
+Otros requieren entrenamiento periódico, como ocurre con la propuesta de Sankaranarayanan et al.~ \cite{sankaranarayanan2009twitterstand}. 
+%
+También los hay que tienen una alta complejidad en términos de espacio y tiempo, como el trabajo de Petrovic et al.~\cite{petrovic2010streaming}.
+%
+Entre ellos se encuentra el trabajo desarrollado por Guzmán y Poblete~\cite{guzman2013line}, que propone un enfoque más liviano en términos de complejidad y que requiere baja supervisión.
+%
+Este consiste en una heurística simple que identifica términos explosivos en un flujo de datos en forma de texto, en este caso, extraídos desde Twitter. 
+%
+Este enfoque usa la velocidad de llegada relativa de los diferentes términos, por consiguiente, se adapta automáticamente a cambios en el flujo de entrada. 
+%
+Además, monitorea un amplio número de términos simultáneamente con pocos recursos.
+%
+Este enfoque no indica el momento exacto en que ocurre un evento emergente, pero si provee un indicador de cuanto ha cambiado la velocidad de llegada relativa de un cierto término entre una ventana de tiempo y la siguiente.
+
+
+Uno de los objetivos de esta tesis es proveer una solución ligera que requiera poca supervisión, con la finalidad de aumentar la cobertura geográfica y el {\em recall} de las detecciones de sismos de baja o mediana magnitud.
+%
+Es por esto que en esta tesis se ha extendido el trabajo de Guzmán y Poblete, para entre otras cosas, generalizarlo a una versión que sea capaz de detectar dentro de señales construidas en base a varios términos y proponer una metodología formal para determinar la ocurrencia de un sismos (o evento).
+%
+En el capítulo \ref{sec:deteccion} se detalla la adaptación realizada a la solución original. 
+
+\section{Uso de redes sociales durante eventos de crisis}
+\label{sec:desastres}
+
+%Diversos estudios se han enfocado en el uso del crowdsourcing y de las redes sociales durante eventos de crisis para ayudar a entender lo que sucede y mejorar los tiempos de respuesta. 
+
+Existen varias propuestas basadas en el \textit{crowdsourcing} para obtener información durante eventos de crisis y así identificar a las personas o lugares más afectados para luego prestar la ayuda necesaria de forma más eficiente. 
+%
+Algunos ejemplos son: \textit{Ushahidi}, plataforma colaborativa presentada por O. Okolloh\cite{okolloh2009ushahidi} que crea un mapa de crisis; \textit{Sahana}, sistema Web de administración de desastres presentado por Samaraweera et. al.\cite{samaraweera2007sahana} que permite la coordinación de búsqueda de personas desaparecidas, seguimiento de víctimas, campamentos y voluntarios: y \textit{Person Finder}, aplicación Web desarrollada por Google que permite enviar formulario sobre personas desaparecidas para ayudar a la búsqueda de estas mismas\cite{PersonFinder}. 
+
+Haciendo referencia al uso específico de Twitter durante eventos de crisis, se han realizado algunos estudios enfocados en el desarrollo de herramientas para el procesamiento de mensajes y otros enfocados en la recolección de mensajes y su clasificación.
+%
+Respecto al procesamiento de mensajes, hay estudios como el de Verma et. al.\cite{verma2011natural}, basados en procesamiento de lenguaje natural para extraer información relevante de mensajes de Twitter, así como también, trabajos como el de Olteanu et. al.\cite{olteanu2014crisislex}, en el cual se estudian léxicos a través de diversas pruebas estadísticas para obtener un conjunto de palabras asociadas a un evento en particular.
+%
+En relación a la recolección e identificación de situaciones de emergencia, Kumar et. al.\cite{kumar2011tweettracker} propone una herramienta llamada {\em TweetTracker} que permite recolectar mensajes desde el Stream de Twitter para luego visualizar la procedencia de los mismos y filtrar los términos más utilizados. %Sin embargo, esta aplicación solo recolecta mensajes en base a una serie de keywords configurados manualmente en su sistema de administración. 
+%
+Otro trabajo con un objetivo similar es de Marcus et. al.\cite{marcus2011twitinfo} quienes presentan {\em Twitinfo}, un sistema Web para filtrar, buscar y analizar información relacionada a incidentes o crisis del mundo real.
+%
+También se puede mencionar el trabajo de Imran et. al. \cite{imran2014aidr} en el que se presenta AIDR (Artificial Intelligence for Disaster Response). Esta herramienta genera una instancia Web que permite recolectar mensajes de Twitter bajo ciertas palabras claves y geolocalización, la cual a su vez dispone de un clasificador que debe ser entrenado para distinguir entre distintas categorías pre-definidas por la aplicación.
+
+También se han presentado otras soluciones enfocadas en la detección de eventos, como {\em Twitris V3}\cite{purohit2013twitris}, propuesto por Purohit y Sheth, que hace un uso de un conjunto de palabras configuradas previamente para detectar un evento y generar análisis espacio-temporal, de contenido de personas y sentimientos. Finalmente, hay trabajos enfocados en la estimación de daño, como el trabajo expuesto por Ashktorab et. al. \textit{Tweedr}\cite{ashktorab2014tweedr}, en el que se enfoca principalmente en métodos de clasificación y clustering para generar filtros que origen reportes de daños existentes en un suceso pero no los identifica automáticamente.
+
+\section{Detección de sismos usando Twitter}
+\label{sec:deteccionsismos}
+
+Dentro del tópico informática en casos de crisis, hay trabajos que han mostrado que es posible detectar la ocurrencia de sismos usando datos de redes sociales del tipo microblog como Twitter. 
+%
+En particular, hay dos enfoques principales para abordar la detección de sismos usando los datos de redes sociales: modelos probabilísticos y el algoritmo STA/LDA ({\em short term average vs long term average}). Todos los sistemas están basado en la obtención de mensajes públicos desde Twitter que probablemente están reportando en tiempo real la ocurrencia de un sismo. 
+
+ 
+\subsection{Modelos Probabilísticos Temporales}
+\label{sec:modelosprob}
+
+El trabajo de Sakaki et al. \cite{sakaki2013tweet,sakaki2010earthquake} (quien extendió el trabajo de Okazaki et al. \cite{okazaki2010semantic}), y el trabajo de investigadores de CSIRO Australia \cite{yin2012using,robinson2013sensitive} utilizan modelos probabilísticos temporales para la detección de sismos. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Sakaki et al. Research
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Sakaki et al. \cite{sakaki2013tweet}  presenta un modelo temporal, basado en una distribución exponencial, para identificar la ocurrencia de sismos en tiempo real y un modelo geo-espacial para detectar el epicentro del evento.
+%
+Su sistema, el cual es específico para Japón, extrae mensajes usando la API de búsqueda de Twitter y filtra los mensajes relevantes usando palabras clave relacionadas con sismos. 
+%
+Este mecanismo para extraer los mensajes tiene como desventaja una restricción impuesta por las normas de Twitter que limita la cantidad de consultas que es posible realizar por minuto.
+%
+Los mensajes son procesados por su sistema usando un clasificador SVN que descarta los mensajes menos relevantes. 
+%
+Para entrenar el clasificador es necesario etiquetar un conjunto de datos suficientemente grande indicando para cada {\em tweet} si es relevante o no.
+%
+Para localizar los mensajes utilizan, si es que está disponible, la información GPS asociada al {\em tweet} o la localidad asociada al perfil del usuario que publica el {\em tweet}. 
+%
+Ellos validan el sistema cuantitativamente usando un conjunto de reportes oficiales de sismos de la Agencia Meteorológica de Japón (JMA).
+%
+Los reportes oficiales están medidos en una escala de intensidad que mide niveles de percepción, por lo tanto, el análisis considera únicamente sismos perceptibles.
+%
+El sistema que ellos proponen tiene un importante trade-off entre precisión y {\em recall}, basado en un parámetro dado por el número de mensajes relevantes necesarios para la detección. 
+%
+Los autores reportaron un {\em recall} de $0.93$ al obtener un $0.2$ de precisión~\footnote{El valor exacto de la precisión no queda claro a partir del gráfico mostrado en\cite{sakaki2013tweet}.}.
+%
+El mejor valor de precisión alcanzado por su sistema es de $0.75$ y $0.8$ de {\em recall}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% CSIRO Australia Research
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Investigadores de CSIRO Australia~\cite{yin2012using} proponen un modelo temporal, basado en una distribución binominal, para detectar desastres en Australia y Nueva Zelanda. 
+%
+ESA~\cite{robinson2013sensitive}, su sistema de prueba de concepto, esta diseñado como un sistema de soporte para situaciones de emergencia y muestra información geográfica de mensajes relevantes. 
+%
+ESA obtiene la información relevante usando la API de búsqueda de Twitter y usando filtros basados en cuadros de límite geográfico que encierran Australia y Nueva Zelanda.
+%
+El sistema fue validado con un conjunto de 20 sismos detectados por el sistema, los cuales fueron comparados con reportes oficiales.
+%
+Esta evaluación muestra que el sistema tiene una precisión de $0.85$, {\em recall} de $0.77$ y F-measure de $0.81$ para sismos entre $2.2$ y $5.2$ de magnitud, con tiempo de respuesta promedio de 3:03 minutos (tiempo mínimo de 1:05 minutos y máximo de 5:34 minutos).
+%
+Aunque hay una versión de ESA~\footnote{\url{https://esa.csiro.au/ausnz/index.html}}, la solución no está disponible actualmente para otras regiones geográficas. 
+
+
+Los enfoques basados en modelos probabilísticos requieren un periodo inicial de entrenamiento para estimar la probabilidad de distribución de los datos de entrada.
+%
+Este periodo de entrenamiento debe ser realizado de forma off-line y por lo tanto no se adapta dinámicamente a cambios en el flujo de datos de entrada. 
+%
+Es necesario además ajustar ciertos parámetros para reducir las falsas alarmas. 
+
+
+\subsection{Algoritmo STA/LDA (Short Term Average vs Long Term Average)}
+\label{sec:stalda}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Earle et al. Research
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+El algoritmo STA/LDA es usado en sismología para detectar y medir fases sísmicas. 
+%
+El trabajo de Earl et al.~\cite{earle2012twitter} usa este enfoque. 
+%
+Ellos recolectan datos usando la API de búsqueda de Twitter. 
+%
+Aunque al reportar sus resultados no detallan el número de sismos que son capaces de detectar usando reportes oficiales, si muestran de forma general el comportamiento de su sistema al modificar ciertos parámetros. 
+%
+Para reducir las falsas alarmas, ellos asumen un compromiso entre el número de detecciones y detectar sólo eventos de alto impacto.
+%
+Previamente en el año 2010, Earl et al.~\cite{earle2010omg} realizó un análisis exploratorio de los datos recolectados durante un terremoto ocurrido en California el año 2009. 
+%
+En este estudio describen, desde el punto de vista de sismología, las ventajas y limitaciones de utilizar las redes sociales como fuente de información para la detección de eventos sísmicos.
+% 
+Los resultados indicaban que en algunos casos los mensajes obtenidos a través de Twitter llegaban más rápido que los reportes de sensores sismográficos. 
+%
+Sin embargo existían importantes limitaciones, por ejemplo, relacionadas al número de usuarios cerca de la zona afectada, lo que puede influir en los resultados significativamente.
+%
+Los investigadores concluyeron que este tipo de técnicas no puede reemplazar los sensores físicos de detección de sismos, pero sugieren el uso de las redes sociales como una fuente de datos complementaria. 
+%
+Destacan que, además de que los mensajes de la red social llegan y se difunden rápidamente, estos incluyen opiniones de los usuarios acerca del evento, un aspecto que no puede ser detectado o descrito por ningún otro tipo de sensor. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Avvenuti et al. Research
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Avvenuti et al.~\cite{avvenuti2014earthquake, avvenuti2014ears} también usa este enfoque para la detección de sismos en un sistema específico para Italia.
+%
+Su sistema, EARS, esta pensado para detectar sismos y mejorar la respuesta en casos de crisis en Italia.
+%
+EARS recolecta mensajes usando la API de \textit{streaming} de Twitter y extrae nombres de localidades del texto del {\em tweet} para proveer información relacionada con la localidad afectada.
+%
+Los autores reportan una precisión de $1.00$, {\em recall} de $0.71$ y {\em F-measure} de $0.83$ para sismos  de magnitud sobre $4.0$. 
+%
+Al igual que en el trabajo de Sakaki et al.~\cite{sakaki2013tweet}, una parte importante del proceso de EARS consiste en el filtrado y en mantener sólo los mensajes que tienen alta probabilidad de ser reportes en tiempo real de un sismo, logrando de esta forma minimizar lo más posible el ruido y facilitar la detección.
+%
+El proceso de filtrado se basa en un conjunto de características y clasificadores, los cuales están entrenados para detectar sólo mensajes relevantes. 
+%
+Este estricto filtro evita el uso de palabras como \textit{tremando} (temblando) porque es frecuente en mensajes que no necesariamente están relacionados con sismos. 
+%
+Es por esto que este tipo de enfoque elimina mensajes potencialmente relevantes que podrían mejorar la detección de eventos y su caracterización.  
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Discussion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+La restricciones basadas en filtros y clasificadores, que limitan la entrada de estos sistemas solo a mensajes muy relevantes, les permiten tener buena precisión para la detección. 
+%
+Sin embargo, el \textit{recall} se ve disminuido en la detección de eventos de bajo impacto. 
+%
+Además, la escalabilidad se ve limitada en el caso en que se desee añadir más idiomas al sistema. 
+%
+Esto aumentaría el vocabulario, lo que a su vez introduciría ruido en los datos y afectaría la precisión. 
+%
+Hay un alto costo asociado al etiquetado de los datos para el entrenamiento de clasificadores y al diseño de filtros que sirvan para mensajes que contengan texto en cualquier idioma y que provengan de cualquier país.
+
+\section{Casos de estudio de sismos utilizando Twitter}
+\label{sec:otroscasos}
+
+Otros estudios relacionados que son un poco menos relevantes que los mencionados previamente, corresponden a casos de estudio realizados utilizando datos recolectados desde Twitter durante la ocurrencia de algún sismo. 
+
+Entre estos se encuentra el trabajo de Crooks et al.~\cite{crooks2013earthquake} que realiza un estudio utilizando datos recolectados durante un sismo ocurrido en Estados Unidos en año 2011. En este estudio presenta una mirada general al comportamiento de las personas durante el evento sísmico y muestra que existe una relación entre el tiempo transcurrido desde el inicio del sismo hasta que se publica el {\em tweet} y la distancia a la que se encuentra el usuario respecto al epicentro del sismo. 
+
+También está el trabajo de Burks y Miller~\cite{burks2014rapid} quienes comparan modelos de regresión para predecir la intensidad de sismos utilizando Twitter. Para ello utilizan datos estadísticos calculados a partir de datos extraídos desde la red social y los complementan con mediciones sísmicas reales proveídas por el Centro Sismológico de Estados Unidos, tales como la magnitud de momento, latitud y longitud del epicentro, etc. Es decir, no es una estimación puramente basada en Twitter.

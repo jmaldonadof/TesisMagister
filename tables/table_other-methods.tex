@@ -1,0 +1,22 @@
+ \resizebox{1.0\columnwidth}{!}{
+  \begin{tabular}{lccccc}
+    \toprule
+    \small{Approach} & P	& R & F-M & \small{Catalog} & \small{Earthquakes} \\
+    	\midrule
+    
+    		\small{Ours ($\geq 4.0$)}  &  0.99 &  0.85 &  0.91 & \small{GUC} & 201 \\
+    		\small{Ours ($<4.0$)}  &  1.00 & 0.15 & 0.26 & \small{GUC} & 66 \\
+    	\midrule
+    		\small{EARS ($\geq 4.0$)}	  &	1.00 & 1.00 & 1.00 & \small{INGV} & 7 \\
+		\small{EARS ($<4.0$)}  &  0.28 & 0.09 & 0.14 & \small{INGV} & 397 \\
+	\midrule
+		\small{Sakaki et al.} &	0.75 & 0.80 & 0.77 & \small{JMA} & 1,136 \\
+	\midrule
+		\small{Earle et al.}  & 0.94 &  0.01   &  0.02   & \small{USGS} & 5175 \\
+	\midrule
+		\small{ESA}\tablefootnote{Estimated over an average of 98 earthquakes $\geq 4.0$ in Australia, for two months.}	& 0.85 & $\approx 0.2$ & $\approx 0.32$ & \small{GeoNet, GA} & $\approx98$ \\
+	\bottomrule
+   \end{tabular}
+   }
+   \vspace{-0.4cm}
+  \caption{Comparison of other works related with seismic detection systems. The earthquakes columns are the number of events used in each evaluation.}\label{table:other-methods} \vspace{0.2cm}

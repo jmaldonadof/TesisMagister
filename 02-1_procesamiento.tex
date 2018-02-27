@@ -1,0 +1,116 @@
+\chapter{Enriquecimiento de la información}
+\label{cap:procesamiento}
+
+Uno de los objetivos específicos de esta tesis es la extracción de información u otros metadatos que permitan caracterizar los eventos sísmicos. 
+%
+La información del \textit{tweet} que se obtiene a partir de la API de Twitter contiene datos interesantes, tales como, el idioma en el que está escrito el mensaje y en algunos casos el lugar desde donde este fue publicado. Sin embargo, el porcentaje de mensajes con información geográfica asociada es muy bajo (2\%) y el idioma no es muy útil para inferir desde donde se publican los mensajes.
+%
+En conclusión, la información tal como es recibida no es suficiente para caracterizar los eventos. 
+
+Lo que se consideró más relevante fue la obtención de datos geográficos, ya que etiquetar los mensajes en base al país de publicación es crítico si se desea detectar y monitorizar sismos de forma global.
+Además, se espera poder dar un buen soporte especialmente para el caso de Chile, por lo que obtener información más granular respecto a la ubicación geográfica durante sismos en Chile también se considera importante. En la sección \ref{sec:geocodificacion} se detalla el trabajo realizado para enriquecer los datos geográficos asociados a los mensajes.
+
+Con la intención de complementar la información con otros datos, se explora la posibilidad de analizar el sentimiento de los mensajes. La intuición tras esta decisión es observar si un cambio ``explosivo'' en el sentimiento general de los mensajes ayuda a detectar la ocurrencia de un evento sísmico. También abre posibilidades de trabajos futuros como, por ejemplo, el estudio de la correlación entre el sentimiento de los mensajes y la intensidad de un sismo. En la sección \ref{sec:sentimiento} se detalla la herramienta utilizada y cómo fue aplicada.
+
+\section{Geocodificación de los datos}
+\label{sec:geocodificacion}
+
+Al recolectar los datos utilizando la API de Twitter se obtiene información asociada a cada \textit{tweet}. 
+%
+Esta información, en algunos casos, incluye información geográfica, dependiendo si el usuario tiene activado o no los mecanismos de geolocalización del dispositivo desde el cual publicó el mensaje.
+%
+El porcentaje de usuarios de Twitter que tienen activada la opción de compartir las coordenadas geográficas es muy bajo (cercano al 2\%) y varía dependiendo de cada país. 
+%
+Sin embargo, existen otros datos asociados a un \textit{tweet} que nos permiten inferir una posible ubicación desde la cual se publica ese mensaje. 
+%
+Estos datos no son 100\% confiables ni precisos y tampoco están disponibles para todos los \textit{tweets}, pero sin duda aumentan el porcentaje de \textit{tweets} para los cuales podemos aproximar una localidad llegando hasta un 80\%.
+
+
+Las formas en que se obtuvo información relacionada a la localidad de un \textit{tweet} son:
+
+\begin{enumerate}
+\item Coordenadas GPS: Disponibles cuando el usuario tiene activado el mecanismo de GPS en su dispositivo y activada la opción que permite compartir estos datos en la red social.
+
+\item Twitter Places: Cuando un usuario de Twitter escribe un mensaje asociado a algún lugar y tiene activado el GPS (no necesariamente permitiendo compartir las coordenadas), por ejemplo: \textit{``Que buen rato con amigas en el Starbucks''}. El dispositivo le sugiere al usuario agregar el lugar a partir de una lista de lugares que Twitter ya tiene almacenados, para este caso podría ser ``Starbucks Coffee, Agustinas, Santiago Centro, Santiago, Chile''. Si la persona acepta la sugerencia, esa información quedará asociada al \textit{tweet} y al ser un lugar que existe dentro de las bases de datos de Twitter, la información es muy completa.
+
+\item Localidad del perfil del usuario: Cada usuario tiene la posibilidad de personalizar su perfil de Twitter. Entre los datos del perfil se encuentra información sobre su localidad, sin embargo, el usuario puede completar esta información ingresando texto libre. Como resultado, los usuarios escriben los nombres de los lugares de diferentes formas, con diferentes grados de precisión y por supuesto, también hay muchos nombres de lugares inexistentes o textos que no indican realmente dónde vive el usuario. A pesar de esto, este campo es muy utilizado por los usuarios de Twitter y en general si contiene información sobre un lugar real. 
+
+\item Localidades mencionadas en el texto del \textit{tweet}: Al estar analizando \textit{tweets} que reportan sobre sismos, muchos de los mensajes incluyen nombres de localidades. Al igual que en el caso anterior, esta información puede estar escrita de diversas formas y siempre existe la posibilidad de que no sea información real. %Sin embargo esta información está presente en muchos de los mensajes y bajo el amparo de la ley de los grandes números, en esta tesis esta información también es considerada al momento de caracterizar un evento. 
+
+\end{enumerate} 
+
+En los pocos casos de \textit{tweets} que contienen información GPS, la geolocalización es directa. 
+%
+Sin embargo, para los casos descritos en los puntos 2, 3 y 4, es necesario realizar procedimientos extra. 
+
+
+Para extraer la información de localización que se indica en los puntos 3. y 4. es necesario encontrar menciones de localidades en el texto del campo de localidad del usuario y en el corpus del \textit{tweet}.  
+%
+Para esa tarea se utiliza un listado de nombres de países y sus traducciones a diferentes idiomas. 
+%
+Además, se cuenta con un listado de ciudades chilenas y de ciudades japonesas, que permite obtener información más detallada sobre localidades dentro de Chile y Japón, dos países altamente sísmicos y con un masivo uso de Twitter. 
+%
+Para encontrar las menciones se analiza el texto buscando ocurrencias de países en primer lugar, si el texto no contiene información de ningún país y el \textit{tweet} está escrito en español, se buscan nombres de ciudades chilenas. De la misma forma, para el caso de los \textit{tweets} escritos en japonés, se buscan nombres de ciudades de japón. 
+%
+Esto se puede extender para otros países de los cuales se quiera obtener información más detallada. Pero en esta tesis se evitó, porque las coincidencias entre nombres de ciudades de diferentes países puede causar problemas en los resultados obtenidos. 
+%
+No se utilizó algo más sofisticado para extraer nombres de localidades debido a que estos datos tienen que ser procesados en tiempo real y no ocasionar cuellos de botella que retrasen los tiempos de la detección de sismos.
+
+	
+Una vez obtenidos los nombres de localidades para los casos 3 y 4, es necesario además agregar coordenadas geográficas.
+%
+Esto también aplica para el caso 2, en donde el \textit{tweet} tiene asociada información proveniente de \textit{Twitter Places}.
+%
+Para los casos en que solo se tiene información del país, se les asignaron coordenadas genéricas en un punto céntrico del territorio. 
+%
+Para los casos en que hay información de las ciudades, se asignaron las coordenadas de la ciudad respectiva. 
+
+
+Un trabajo similar de inferencia de geolocalización al desarrollado en esta tesis fue utilizado en un estudio anterior sobre caracterización de eventos noticiosos chilenos en redes sociales \cite{maldonado2015spatio}. En ese estudio se complementa la información utilizando los lugares mencionados en el corpus de los mensajes que conforman cada evento y en la información del perfil de los usuarios que los emitieron, infiriendo los lugares donde ocurre cada evento y los lugares donde despertó interés la noticia respectivamente.
+
+\section{Análisis de Sentimiento}
+\label{sec:sentimiento}
+
+%
+El análisis de sentimiento, de forma general, se basa en la idea utilizar técnicas de procesamiento de lenguaje natural, análisis de texto y lingüística computacional, para extraer, cuantificar y estudiar estados afectivos e información subjetiva. 
+%
+En particular en esta tesis se ejecutó una tarea básica en análisis de sentimientos que consiste en clasificar la polaridad de un texto.
+
+
+La información obtenida fue utilizada a modo de experimentación. 
+%
+En en análisis descrito en el \ref{cap:analisis} se evaluó si al crear señales considerando la polaridad dentro de los atributos de interés $K$  mejoraba la detección al ocurrir un sismo. 
+%
+La información extraída mediante esta técnica es almacenada en la base de datos. 
+%
+De esta forma, queda a disposición en caso de ser útil en estudios posteriores que busquen estimar la intensidad de un evento o hacer un análisis diferente. 
+
+
+Para clasificar la polaridad del \textit{tweet} se utilizó el algoritmo SentiStreigth\footnote{\url{http://sentistrength.wlv.ac.uk}} en su versión para Java. 
+%
+Este algoritmo, el cual es de uso gratuito para fines de investigación, permite determinar la fuerza del sentimiento positivo o negativo en textos cortos, incluso si estos están escritos utilizando un lenguaje informal. 
+%
+SentiStrength reporta dos puntajes correspondientes a la fuerza del sentimiento:
+
+\begin{center}
+-1 (no negativo) a -5 (extremadamente negativo)\\
+1 (no positivo) a 5 (extremadamente positivo)
+\end{center}
+
+La razón por la que se reportan dos puntajes, es porque estudios sicológicos han demostrado que las personas procesan los sentimientos positivos y negativos en paralelo, como emociones mixtas.
+%
+Este algoritmo puede ser configurado para ser utilizado con textos en finlandés, alemán, holandés, español, ruso, portugués, francés, árabe, polaco, persa, sueco, griego, galés, italiano y turco. 
+%
+En los experimentos realizados, se utilizó con los idiomas disponibles, dejando fuera los mensajes escritos en idiomas como el Chino o el Japonés.
+
+
+Con la finalidad de obtener una mejor adaptación del algoritmo al idioma español utilizado en Chile, se modificó el diccionario agregando palabras asociadas a modismos chilenos.
+%
+Dentro del conjunto de palabras que se agregaron se encuentran algunas utilizadas frecuentemente cuando se reporta un sismo y que denotan sorpresa, miedo o rabia, como improperios chilenos u otras expresiones comunes.
+%
+Además se agregaron palabras que denotan aprobación, como por ejemplo \textit{``bacán''}.
+
+En el capítulo \ref{cap:analisis} se presentan los resultados obtenidos en la evaluación de las señales formadas a partir de la polaridad del sentimiento de los \textit{tweets}.
+
+
+

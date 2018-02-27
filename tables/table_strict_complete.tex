@@ -1,0 +1,55 @@
+ \resizebox{1.0\columnwidth}{!}{
+  \begin{tabular}{c|lccc}
+    \toprule
+    & \multicolumn{1}{l}{\small{Signal Type (USGS)}}&\multicolumn{1}{c}{\small{Precision}}&\multicolumn{1}{c}{\small{Recall}}&\multicolumn{1}{c}{\small{F-Measure}}\\
+    \midrule
+    \parbox[t]{1.5mm}{\vspace{-0.3cm}\multirow{5}{*}{\rotatebox[origin=c]{90}{\small{$\geq 4.0$}}}}
+%    & \small{Earthquake keywords (GUC)} & {\bf 1.00} & {\bf 0.59} & {\bf 0.74} \\
+%    & \small{Geolocation from text (GUC)} & 0.96 & 0.41 & 0.57 \\
+%    \cline{2-5}
+    & \small{Earthquake keywords} & \small{{\bf 0.95}} &  \small{{\bf 0.75}} & \small{{\bf 0.84}} \\
+	& \small{Geolocation from text} & \small{0.94} & \small{0.79} & \small{0.86} \\    
+    & \small{Geolocation from user} & \small{0.95} & \small{0.81} & \small{0.88} \\
+    \midrule
+    \parbox[t]{1.5mm}{\vspace{-0.3cm}\multirow{5}{*}{\rotatebox[origin=c]{90}{\small{$<4.0$}}}}
+ %   & \small{Earthquake keywords (GUC)} & 0.95 & 0.02 & 0.04 \\
+%	& \small{Geolocation from text (GUC)} & 0.84 & 0.12 & 0.21 \\
+%	\cline{2-5}
+	& \small{Earthquake keywords} & \small{0.58} & \small{0.18} & \small{0.27} \\
+	& \small{Geolocation from text} & \small{0.53} & \small{0.75} & \small{0.62} \\
+	& \small{Geolocation from User} & \small{0.54} & \small{0.79} & \small{0.64} \\
+    \bottomrule
+  \end{tabular}
+  }
+  \vspace{-0.4cm}
+  \caption{\small{Global strict evaluation with the USGC catalog.}}
+  \label{table:global-strict}
+
+ \vspace{0.2cm}
+ \resizebox{1.0\columnwidth}{!}{
+  \begin{tabular}{c|lccc}
+    \toprule
+    & \multicolumn{1}{l}{\small{Signal Type (GUC)}}&\multicolumn{1}{c}{\small{Precision}}&\multicolumn{1}{c}{\small{Recall}}&\multicolumn{1}{c}{\small{F-Measure}}\\
+    \midrule
+    \parbox[t]{1.5mm}{\vspace{-0.5cm}\multirow{5}{*}{\rotatebox[origin=c]{90}{\small{$\geq 4.0$}}}}
+    & \small{Earthquake keywords} & \small{{\bf 1.00}} & \small{{\bf 0.59}} & \small{{\bf 0.74}} \\
+    & \small{Geolocation from text} & \small{0.96} & \small{0.41} & \small{0.57} \\
+ %   \cline{2-5}
+ %   & \small{Earthquake keywords (USGS)} & {\bf 0.95} &  {\bf 0.75} & {\bf 0.84} \\
+%	& \small{Geolocation from text (USGS)} & 0.94 & 0.79 & 0.86 \\    
+%    & \small{Geolocation from user (USGS)} & 0.95 & 0.81 & 0.88 \\
+    \midrule
+    \parbox[t]{1.5mm}{\vspace{-0.5cm}\multirow{5}{*}{\rotatebox[origin=c]{90}{\small{$<4.0$}}}}
+    & \small{Earthquake keywords} & \small{0.95} & \small{0.02} & \small{0.04} \\
+	& \small{Geolocation from text} & \small{0.84} & \small{0.12} & \small{0.21} \\
+%	\cline{2-5}
+%	& \small{Earthquake keywords (USGS)} & 0.58 & 0.18 & 0.27 \\
+%	& \small{Geolocation from text (USGS)} & 0.53 & 0.75 & 0.62 \\
+%	& \small{Geolocation from User (USGS)} & 0.54 & 0.79 & 0.64 \\
+    \bottomrule
+  \end{tabular}
+  }
+  \vspace{-0.4cm}
+  \caption{\small{Local strict evaluation with the GUC catalog.}}
+  \label{table:local-strict}
+   \vspace{0.2cm}

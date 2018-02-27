@@ -1,0 +1,18 @@
+ \resizebox{1.0\columnwidth}{!}{
+  \begin{tabular}{c|lccc}
+  \toprule
+  & \multicolumn{1}{l}{\small{Signal Type (GUC)}}&\multicolumn{1}{c}{\small{Precision}}&\multicolumn{1}{c}{\small{Recall}}&\multicolumn{1}{c}{\small{F-Measure}}\\ 
+  \midrule
+  \parbox[t]{2mm}{\multirow{2}{*}{\rotatebox[origin=c]{90}{\small{$\geq 4.0$}}}} 
+  	& \small{Earthquake keywords} & \small{{\bf 0.99}} & \small{{\bf 0.85}} & \small{{\bf 0.91}}\\
+	& \small{Geolocation from text} & \small{0.98} & \small{0.64} & \small{0.78}\\
+  \midrule
+   \parbox[t]{2mm}{\multirow{2}{*}{\rotatebox[origin=c]{90}{\small{$<4.0$}}}} 
+	& \small{Earthquake keywords} & \small{1.00} & \small{0.15} & \small{0.26} \\
+	& \small{Geolocation from text} & \small{0.94} & \small{0.23} & \small{0.37} \\
+  \bottomrule
+  \end{tabular}
+  }
+  \vspace{-0.4cm}
+  \caption{\small{Super-strict evaluation using GUC ``felt earthquakes''.}} \label{table:super-strict}
+  \vspace{0.2cm}

@@ -1,0 +1,20 @@
+\begin{conclusion}
+\label{cap:conclusion}	
+
+Se ha presentado un enfoque simple y eficiente para la detección de sismos basada en sensores sociales. El enfoque propuesto difiere de otros trabajos existentes en que es un modelo no supervisado y tolerante al ruido de los mensajes, permitiendo de esta forma, monitorizar eventos en todo el mundo y en diferentes idiomas. La parametrización inicial es de bajo costo, ya que no necesita conjuntos de mensajes etiquetados ni procesos de entrenamiento. Además, se adapta automáticamente en el tiempo dependiendo de las variaciones en la velocidad de llegada de los mensajes de interés. Los experimentos realizados muestran que el algoritmo propuesto es competitivo en relación al estado del arte, mejorando tanto la precisión como el {\em recall}. Al ser tolerante al ruido, es capaz de retener un número mayor de mensajes sin afectar la detección, los que son utilizados para la descripción de los eventos. Al tener más mensajes es posible describir los eventos de forma más detallada y diferenciar, por ejemplo, cuando ocurren dos eventos consecutivos en lugares diferentes. Esto contribuye a crear catálogos más completos. El enfoque de detección de sismos en base a sensores sociales está limitado por la cobertura geográfica de Twitter y por lo tanto no será posible detectar sismos rápidamente en áreas que no estén habitadas por usuarios de Twitter. 
+
+Por otro lado, se desarrolló una aplicación Web que despliega la información obtenida en tiempo real. Esta aplicación es utilizada por el Centro Sismológico Nacional de la Universidad de Chile (CSN) y por el Servicio Hidrográfico y Oceanográfico de la Armada de Chile (SHOA) para complementar sus fuentes de información durante eventos sísmicos. 
+% Aqui mencionar la utilidad en casos especificos de los casos de estudio presentados.
+La aplicación también permite explorar los datos históricos de eventos sísmicos pasados, disponibles desde la fecha en que se puso el marcha el sistema recolector de información (Octubre 2015). Las visualizaciones disponibles en la aplicación están orientadas para que los usuarios del sistema puedan responder rápidamente a tres preguntas, las que ayudan a entender, de forma general, un evento. Las preguntas son: 
+\begin{enumerate}
+\item ¿Qué sucedió? Esta pregunta se puede responder observando los mensajes publicados por las personas en relación al sismo.
+\item ¿Cuándo sucedió? La línea tiempo que muestra la frecuencia de los mensajes permite observar rápidamente el momento en el cual comienza el evento. 
+\item ¿Dónde sucedió? Los mapas de calor y de marcadores permiten identificar la zona afectada. Además, durante los minutos posteriores a cada evento, permiten observar cómo la noticia se difunde hacia otras partes del mundo.
+\end{enumerate} 
+
+Además, durante el periodo de desarrollo de esta tesis se aceptó una publicación sobre el sistema de detección de sismos propuesto y su evaluación en \textit{The 5th AAAI Conference on Human Computation and Crowdsourcing} (HCOMP 2017). El artículo aceptado se encuentra disponible en los anexos. Previamente, también se había enviado una versión más corta a la conferencia \textit{The 40th International ACM SIGIR Conference on Research and Development in Information Retrieval} (SIGIR 2017) el cual lamentablemente no fue aceptado debido a que las mejoras del sistema propuesto con respecto al estado del arte no fueron expuestas de forma que los evaluadores las consideraran lo suficientemente relevantes. Este primer intento y las revisiones de los evaluadores permitieron preparar una versión más clara y completa.
+
+Cómo se mencionó previamente, la información recolectada hasta la fecha se ha almacenado para estudios y trabajos futuros. Dentro de los posibles estudios a realizar usando los datos de sensores sociales se encuentran: la estimación del tamaño de un sismo, la estimación de la intensidad en diferentes zonas geográficas, la generalización del sistema para su uso en detección de otros tipos de catástrofes naturales que afectan a las ciudades de Chile (erupciones, maremotos, incendios, etc), entre otros.
+
+\end{conclusion}
+

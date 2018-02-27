@@ -1,0 +1,89 @@
+\documentclass[upright, contnum]{umemoria}
+\depto{DEPARTAMENTO DE CIENCIAS DE LA COMPUTACIÓN}
+\author{JAZMINE ALEJANDRA MALDONADO FLORES}
+\title{Detección de sismos y visualización en tiempo real usando usuarios de Twitter como "Sensores Sociales"}
+\auspicio{}
+\date{DICIEMBRE 2016}
+\guia{Bárbara Poblete}
+\carrera{MAGÍSTER EN CIENCIAS, MENCIÓN COMPUTACIÓN}
+\memoria{TESIS PARA OPTAR AL GRADO DE}
+\comision{\ }{\ }{\ }
+
+\usepackage{lipsum}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{scrextend}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+%To show figures in horizontal aligment
+\usepackage{subfig}
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{multirow}
+\usepackage{tablefootnote}
+\usepackage[flushmargin]{footmisc} 
+\usepackage{pdfpages}
+%\usepackage{subcaption}
+
+
+\usepackage{booktabs}
+
+%To leave comments
+\newcommand{\nb}[3]{
+		{\colorbox{#2}{\bfseries\sffamily\scriptsize\textcolor{white}{#1}}}
+		{\textcolor{#2}{\sf\small$\blacktriangleright$\textit{#3}$\blacktriangleleft$}}}
+\newcommand{\jm}[1]{\nb{Jazmine}{purple}{#1}}
+\newcommand{\bp}[1]{\nb{Barbara}{red}{#1}}
+
+
+\begin{document}
+
+\frontmatter
+\maketitle
+
+\begin{abstract}
+En este trabajo de tesis se propone un algoritmo y un sistema computacional que, basado en la extracción de mensajes publicados por los usuarios en Twitter, es capaz de detectar sismos que ocurren en el mundo en tiempo real. Las detecciones se generan en base la monitorización de mensajes escritos en cualquier idioma y publicados desde cualquier país. El enfoque utilizado no es supervisado y se adapta automáticamente a los cambios en la entrada de datos. Para funcionar solo requiere una lista de palabras en múltiples lenguajes, en este caso, la lista se compone por palabras relacionadas con sismos. 
+El método que se propone para detectar sismos es simple y tiene una alta tolerancia al ruido de los datos.  Además, el sistema tiene buenos resultados tanto en términos de precisión como de \textit{recall.} 
+
+Este trabajo complementa los trabajos previos que conforman el estado del arte en esta materia, puesto que los anteriores estudios, en su mayoría, corresponden a sistemas supervisados que implican costos de etiquetado de datos y entrenamiento. Además, los trabajos anteriores utilizan enfoques que detectan en áreas geográficas específicas o para idiomas específicos, añadiendo filtros estrictos para reducir el ruido y haciendo difícil su adaptación a un enfoque internacional. En este documento se presenta una evaluación cuantitativa de las detecciones realizadas en un periodo de 9 meses, que muestra que la solución propuesta es competitiva respecto a los mejores métodos propuestos en el estado del arte. 
+
+Además, se implementó un sistema Web que presenta la información en tiempo real mediante visualizaciones interactivas y que actualmente es utilizado por el Centro Sismológico Nacional de la Universidad de Chile y la ONEMI como una fuente de información complementaria. Esta aplicación Web se encuentra disponible públicamente y puede ser visitada en \url{http://www.twicalli.cl}.
+
+Durante el periodo de trabajo de esta tesis se publicó un artículo en la conferencia HCOMP 2017 (\textit{The 5th AAAI Conference on Human Computation and Crowdsourcing}) y se realizó la presentación respectiva en Quebec, Canadá.  
+
+\end{abstract}
+
+%\begin{dedicatoria} % opcional
+%Una dedicatoria corta. Por ejemplo, \emph{A los creadores de U-Campus}
+%\end{dedicatoria}
+
+%\begin{thanks} % opcional
+%
+%\end{thanks}
+\cleardoublepage
+
+\tableofcontents
+\listoftables % opcional
+\listoffigures % opcional
+
+\mainmatter
+
+\input{00_introduccion.tex}
+\input{01_teoria.tex}
+%\input{02_sistema.tex}
+\input{02-1_deteccion.tex}
+\input{02-1_procesamiento.tex}
+\input{02-2_arquitectura.tex}
+\input{02-3_aplicacion.tex}
+\input{03_analisis.tex}
+\input{04_casos.tex}
+\input{05_conclusion.tex}
+
+\bibliographystyle{plain}
+\bibliography{bibliografia}
+
+\input{06_anexo.tex} % evaluación por países
+\input{07_anexo.tex} % paper HCOMP 2017
+
+\end{document}
