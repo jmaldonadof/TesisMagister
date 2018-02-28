@@ -7,7 +7,23 @@
 \chapter{Análisis Experimental}
 \label{cap:analisis}
 
+\jm{Introducción del capítulo, objetivos del capítulo}
+En este capítulo se analiza la efectividad de la metodología de detección de sismos propuesta. 
+%
+El análisis realizado comienza identificando la configuración inicial óptima del algoritmo. 
+%
+definir los datos con los cuales se realiza la validación (\textit{ground truth}) 
+
+se comparan los resultados obtenidos al utilizar diferentes conjuntos de atributos de interés\footnote{Revisar el capítulo \ref{cap:deteccion} para más detalles de la metodología de detección y los conceptos asociados}.
+
+
+se comparan los resultados obtenidos considerando una variedad de atributos como elementos de interés.
+
+
 \section{Preparación del experimento}
+
+\jm{Introducción de la sección}
+
 	\subsection{Conjunto de datos de \textit{Twitter}}
 	
 		El flujo de datos $\mathcal{F}$ está conformado por \textit{tweets} publicados en \textit{Twitter} desde el 25 de Enero al 25 de Octubre del 2016 (9 meses). Técnicamente, sólo es posible acceder a una muestra del flujo público completo, por lo tanto, los datos son recuperados ya filtrados en base a palabras clave o atributos de interés especificados en $\mathcal{K}$ (en vez de obtener todo el flujo de datos y luego filtrar).  Para obtener los datos se utiliza la API para acceder al \textit{stream} público, tal como se explica en la sección \ref{sec:recoleccion} sobre recolección de datos. Los \textit{tweets} son procesados de manera estándar, normalizando el texto y removiendo duplicados (igual ID). El procesamiento es realizado considerando múltiples idiomas, incluyendo idiomas orientales, como chino, japonés, y persa. En total, el conjunto de datos utilizado para el análisis está compuesto por 53.557.475 \textit{tweets}.
