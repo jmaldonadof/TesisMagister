@@ -5,10 +5,59 @@
 \jm{Contrastar resultados con los objetivos específicos}
 \jm{Agregar trabajo futuro}
 
-Se ha presentado un enfoque simple y eficiente para la detección de sismos basada en sensores sociales. El enfoque propuesto difiere de otros trabajos existentes en que es un modelo no supervisado y tolerante al ruido de los mensajes, permitiendo de esta forma, monitorizar eventos en todo el mundo y en diferentes idiomas. La parametrización inicial es de bajo costo, ya que no necesita conjuntos de mensajes etiquetados ni procesos de entrenamiento. Además, se adapta automáticamente en el tiempo dependiendo de las variaciones en la velocidad de llegada de los mensajes de interés. Los experimentos realizados muestran que el algoritmo propuesto es competitivo en relación al estado del arte, mejorando tanto la precisión como el {\em recall}. Al ser tolerante al ruido, es capaz de retener un número mayor de mensajes sin afectar la detección, los que son utilizados para la descripción de los eventos. Al tener más mensajes es posible describir los eventos de forma más detallada y diferenciar, por ejemplo, cuando ocurren dos eventos consecutivos en lugares diferentes. Esto contribuye a crear catálogos más completos. El enfoque de detección de sismos en base a sensores sociales está limitado por la cobertura geográfica de Twitter y por lo tanto no será posible detectar sismos rápidamente en áreas que no estén habitadas por usuarios de Twitter. 
+En este trabajo de tesis se desarrollaron un conjunto de actividades cuyo objetivo general era la implementación de un sistema que, utilizando datos obtenidos desde Twitter, detectase la ocurrencia de sismos en tiempo real y visualizase la información útil extraída de los datos.
 
-Por otro lado, se desarrolló una aplicación Web que despliega la información obtenida en tiempo real. Esta aplicación es utilizada por el Centro Sismológico Nacional de la Universidad de Chile (CSN) y por el Servicio Hidrográfico y Oceanográfico de la Armada de Chile (SHOA) para complementar sus fuentes de información durante eventos sísmicos. 
-% Aqui mencionar la utilidad en casos especificos de los casos de estudio presentados.
+En el capítulo \ref{cap:deteccion} se ha presentado un enfoque simple y eficiente para la detección de sismos basada en sensores sociales. 
+%
+El enfoque propuesto difiere de otros trabajos existentes en que es un modelo no supervisado y tolerante al ruido de los mensajes, permitiendo de esta forma, monitorizar eventos en todo el mundo y en diferentes idiomas. 
+%
+La parametrización inicial es de bajo costo, ya que no necesita conjuntos de mensajes etiquetados ni procesos de entrenamiento. 
+%
+Además, se adapta automáticamente en el tiempo dependiendo de las variaciones en la velocidad de llegada de los mensajes de interés.
+%
+La metodología propuesta es una adaptación de un trabajo previo realizado por J. Guzmán y B. Poblete para detectar eventos genéricos en Twitter y se desarrolló con la colaboración de J. Guzmán, estudiante de doctorado. 
+%
+El resultado obtenido permitió cumplir con el primer objetivo específico de esta tesis de proveer una metodología efectiva y eficiente para la detección de sismos en Chile y el mundo. 
+
+
+También se realizó una evaluación cuantitativa del algoritmo de detección sobre un periodo de 9 meses usando varios criterios y utilizando catálogos de sismos chilenos e internacionales para la validación de los resultados.  
+%
+La evaluación realizada es la más completa realizada hasta la fecha para este tipo de sistemas y %los experimentos realizados muestran que el algoritmo propuesto es competitivo en relación al estado del arte, mejorando, en la mayoría de los casos, tanto la precisión como el {\em recall}. 
+%
+los resultados obtenidos son muy competitivos, alcanzando una precisión de $0.99$ y \textit{recall} de $0.85$ (\textit{F-measure} de $0.91$) para sismos con magnitud $\geq 4.0$ que fueron percibidos por las personas. 
+%
+Para sismos de magnitud $\leq 4.0$, la mayoría de ellos no sentidos por las personas (y por lo tanto no detectados por sensores sociales), se alcanzó una precisión de $1.00$ y \textit{recall} de $0.15$ (F-measure de $0.26$).
+%
+Estos resultados superan significativamente a la mayoría de los resultados reportados por otros sistemas supervisados y no supervisados de estudios similares.
+%
+En el único caso en que el sistema propuesto obtiene resultados cercanos, pero que no superan al sistema con el cual se compara, se compensa debido a que el sistema propuesto detecta sismos en todo el mundo de manera no supervisada mientras que el sistema con el cual se compara lo hace de forma supervisada y en un solo país.
+%
+Con la evaluación realizada se pudo determinar los atributos de interés que entregaban más valor a la detección (palabras clave, geolocalización e idioma) y se descartó la información del análisis de sentimiento que no presentaba resultados satisfactorios. 
+% 
+Con esto se cumplió con el segundo objetivo específico de esta tesis. 
+
+
+El sistema propuesto, al ser tolerante al ruido, es capaz de procesar un número mayor y más diverso de mensajes sin afectar la detección, los que son utilizados para la descripción de los eventos. 
+%
+Al tener más mensajes es posible describir los eventos de forma más detallada y diferenciar, por ejemplo, cuando ocurren dos eventos consecutivos en lugares diferentes, lo que contribuye a crear catálogos más completos. 
+%
+Esta característica del sistema contribuye al cumplimiento del cuarto objetivo que consiste en la extracción de información relevante que permitiera caracterizar un sismo, por ejemplo, los datos geográficos.
+
+
+La metodología propuesta se utilizó para poner en producción un sistema automatizado que recolecta, procesa y detecta sismos automáticamente. 
+%
+Este sistema se puso en marcha en Octubre del año 2015 y se fue mejorando a lo largo del trabajo de tesis. 
+%
+Gracias a esto, se cuenta con datos recolectados desde esa fecha hasta la actualidad almacenados en una base de datos relacional.
+%
+Con esto se cumplen el tercer y el quinto objetivo específico, que están enfocados en la utilización de la metodología propuesta en un sistema de detección automático y en el almacenamiento de datos históricos para estudios posteriores. 
+
+
+
+Por otro lado, para cumplir con el sexto y último objetivo específico, se desarrolló una aplicación Web que despliega la información obtenida en tiempo real. Esta aplicación es utilizada por el Centro Sismológico Nacional de la Universidad de Chile (CSN) y por el Servicio Hidrográfico y Oceanográfico de la Armada de Chile (SHOA) para complementar sus fuentes de información durante eventos sísmicos. 
+%% Aqui mencionar la utilidad en casos especificos de los casos de estudio presentados.
+En el capítulo \ref{cap:casos} se presentaron algunos casos de uso de la aplicación en donde se observa la información que se puede obtener de ella, como las zonas donde la gente percibe el sismo, la descripción que los usuarios expresan a través de los mensajes (si fue un sismo fuerte o no) y permite desambiguar rápidamente si se trata de una falsa alarma.
+%
 La aplicación también permite explorar los datos históricos de eventos sísmicos pasados, disponibles desde la fecha en que se puso el marcha el sistema recolector de información (Octubre 2015). Las visualizaciones disponibles en la aplicación están orientadas para que los usuarios del sistema puedan responder rápidamente a tres preguntas, las que ayudan a entender, de forma general, un evento. Las preguntas son: 
 \begin{enumerate}
 \item ¿Qué sucedió? Esta pregunta se puede responder observando los mensajes publicados por las personas en relación al sismo.
@@ -16,9 +65,25 @@ La aplicación también permite explorar los datos históricos de eventos sísmi
 \item ¿Dónde sucedió? Los mapas de calor y de marcadores permiten identificar la zona afectada. Además, durante los minutos posteriores a cada evento, permiten observar cómo la noticia se difunde hacia otras partes del mundo.
 \end{enumerate} 
 
-Además, durante el periodo de desarrollo de esta tesis se aceptó una publicación sobre el sistema de detección de sismos propuesto y su evaluación en \textit{The 5th AAAI Conference on Human Computation and Crowdsourcing} (HCOMP 2017). El artículo aceptado se encuentra disponible en los anexos. Previamente, también se había enviado una versión más corta a la conferencia \textit{The 40th International ACM SIGIR Conference on Research and Development in Information Retrieval} (SIGIR 2017) el cual lamentablemente no fue aceptado debido a que las mejoras del sistema propuesto con respecto al estado del arte no fueron expuestas de forma que los evaluadores las consideraran lo suficientemente relevantes. Este primer intento y las revisiones de los evaluadores permitieron preparar una versión más clara y completa.
+La aplicación Web se encuentra disponible en \url{http://www.twicalli.cl}.
+%
+A pesar de ser un prototipo, actualmente es la única plataforma de libre acceso disponible en internet y que muestra este tipo de información. 
+%
+Es por esto, en conjunto con la reconocida sismicidad de Chile, que la puesta en marcha del sistema fue mencionada tanto en la prensa nacional e internacional (enlaces disponibles en los anexos). 
+
+
+Además, durante el periodo de desarrollo de esta tesis se aceptó una publicación sobre el sistema de detección de sismos propuesto y su evaluación en \textit{The 5th AAAI Conference on Human Computation and Crowdsourcing} (HCOMP 2017). 
+%
+El artículo aceptado se encuentra disponible en los anexos. 
+%
+Previamente, también se había enviado una versión más corta a la conferencia \textit{The 40th International ACM SIGIR Conference on Research and Development in Information Retrieval} (SIGIR 2017) el cual lamentablemente no fue aceptado debido a que las mejoras del sistema propuesto con respecto al estado del arte no fueron expuestas de forma que los evaluadores las consideraran lo suficientemente relevantes. 
+%
+Este primer intento y las revisiones de los evaluadores permitieron preparar una versión más clara y completa.
+
 
 Cómo se mencionó previamente, la información recolectada hasta la fecha se ha almacenado para estudios y trabajos futuros. Dentro de los posibles estudios a realizar usando los datos de sensores sociales se encuentran: la estimación del tamaño de un sismo, la estimación de la intensidad en diferentes zonas geográficas, la generalización del sistema para su uso en detección de otros tipos de catástrofes naturales que afectan a las ciudades de Chile (erupciones, maremotos, incendios, etc), entre otros.
+
+El enfoque de detección de sismos en base a sensores sociales está limitado por la cobertura geográfica de Twitter y por lo tanto no será posible detectar sismos rápidamente en áreas que no estén habitadas por usuarios de Twitter.
 
 \end{conclusion}
 

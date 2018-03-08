@@ -9,14 +9,14 @@
 
 En este capítulo se analiza la efectividad de la metodología de detección de sismos propuesta. 
 %
-Como parte de la preparación del experimento, la que detalla en la sección \ref{sec:preparacionExperimento}, se definen los datos con los cuales se realiza la validación (\textit{ground truth}) de los resultados y se realiza un experimento base para identificar la configuración inicial óptima del algoritmo.
+Como parte de la preparación del experimento, la que se detalla en la sección \ref{sec:preparacionExperimento}, se definen los datos con los cuales se realiza la validación de los resultados (\textit{ground truth})  y se realiza un experimento base para identificar la configuración inicial óptima del algoritmo.
 
 
-En la sección \ref{sec:evaluacion} se definen los criterios de evaluación de los resultados, que buscan replicar de la mejor forma posible la evaluación que se realiza en otros estudios del estado del arte y de esta forma poder comparar los resultados de esta metodología con ellos.
+En la sección \ref{sec:evaluacion} se definen los criterios de evaluación de los resultados, que buscan replicar de la mejor forma posible la evaluación realizada en otros estudios del estado del arte y así obtener resultados comparables.
 %
 Luego se procede a evaluar los resultados obtenidos al utilizar diferentes conjuntos de atributos de interés\footnote{Revisar el capítulo \ref{cap:deteccion} para más detalles de la metodología de detección y los conceptos asociados.}.
 
-Finalmente en la sección \ref{sec:discusionEval} se discuten los resultados y la comparación con otros estudios. 
+Finalmente en la sección \ref{sec:conclusiónEval} se discuten los resultados y la comparación con otros estudios. 
 
 \section{Preparación del experimento}
 \label{sec:preparacionExperimento}
@@ -331,7 +331,7 @@ Las tablas~\ref{table:global-strict}, \ref{table:local-strict}, \ref{table:super
 Los resultados, al igual que en otras evaluaciones, fueron divididos por alcance {\em local} o {\em global}, y por magnitud $\geq 4,0$ y $< 4,0$. Las evaluaciones usando los criterios {\em super-estricto} y {\em moderado} sólo se pudieron realizar usando el catálogo que provee el GUC, porque la clasificación de ``sismos sensibles'' sólo está disponible para este catálogo.
 
 
-En general, los mejores resultados se alcanzan utilizando la señal creada a partir del flujo de mensajes que contienen palabras clave. Según la evaluación moderada, reportada en la tabla ~\ref{table:moderate}, el sistema tiene $Precisión=1.00$, $Recall=0.93$ y $F-measure=0.96$ para sismos $qeq$ 4,0. 
+En general, los mejores resultados se alcanzan utilizando la señal creada a partir del flujo de mensajes que contienen palabras clave. Según la evaluación moderada, reportada en la tabla ~\ref{table:moderate}, el sistema tiene Precisión$=1.00$, Recall$=0.93$ y F-measure$=0.96$ para sismos $qeq$ 4,0. 
 Además, se observa que las señales que consideran menciones de países en el texto del tweet ({\em Geolocalización a partir del texto}) y en el perfil del usuario ({\em Geolocalización a partir del perfil del usuario}) también tienen buenos resultados entregando información para la detección de eventos, como se observa en las tablas~\ref{table:global-strict}, \ref{table:local-strict}, \ref{table:super-strict} and \ref{table:moderate}.
 En la práctica, estas tres señales son utilizadas juntas para detectar y localizar un evento. Primero, la detección es efectuada usando la señal de palabras clave y luego la localidad es identificada observando la señal más anómala (país más anómalo) dentro del conjunto de señales de geolocalización a partir del texto del \textit{tweet}.
 
@@ -391,16 +391,26 @@ Los resultados que se indican en las tablas fueron obtenidos utilizando datos pr
 %
 Cómo un intento más por reproducir los experimentos de trabajos previos, reportamos los resultados del sistema aquí propuesto considerando el catálogo del USGS para sismos de cualquier magnitud en Italia ($p=1.00$, $r=0.90$, {\em f-m}$=0.95$), Japón ($p=0.98$, $r=0.77$, {\em f-m}$=0.86$), Australia ($p=0.91$, $r=0.77$, {\em f-m}$=0.83$) y Nueva Zelanda ($p=0.96$, $r=0.80$, {\em f-m}$=0.87$).
 %
-En la tabla \ref{table:othercountries} se listan los resultados obtenidos para detecciones en otros países considerando el catálogo del USGS.
+En el \nameref{anexo:evaluacionpaises} se listan los resultados obtenidos para detecciones en otros países considerando el catálogo del USGS.
 
  
 \subsection{Falsos Positivos}
 
 Los falsos positivos son poco comunes, algunos ejemplos de detecciones que resultaron ser falsas fueron, durante un concierto de una banda de Pop Coreana en donde muchos usuarios \textit{twittearon} que estaban ``temblando de emoción'', y algunas otras ocasiones, durante simulacros de sismos de carácter masivo. Ambos casos crearon anomalías colectivas en el uso de algunas de las palabras clave y dentro de un rango geográfico específico. En la sección \ref{sec:casosfalsos} se presenta un ejemplo de detección falsa ocasionada por un simulacro de sismo masivo realizado en las islas Filipinas. 
 
-\section{Discusión}
-\label{sec:discusionEval}
+\section{Conclusión de la evaluación}
+\label{sec:conclusionEval}
 
-\jm{Agregar discusión}
+En este capítulo se presentó una evaluación cuantitativa de la metodología propuesta que es más completa que las evaluaciones presentadas en otros estudios relacionados y que abarca un periodo de estudio mayor. Con los resultados obtenidos se pudo comprobar que la detección de sismos usando Twitter es posible incluso a escala internacional. Además, la comparación con estudios del estado del arte muestra que el sistema desarrollado es competitivo a pesar de que la solución propuesta simplifica el procesamiento de los datos y que disminuye los costos debido a que no es necesario contar con datos etiquetados.
 
+Con la evaluación también se verificó que la información relacionada a la ubicación geográfica en los \textit{tweets} es útil para detectar la ocurrencia de los mismos, ya que las señales que incluían nombres de países en el conjunto de atributos de interés presentaban resultados similares o mejores que los obtenidos al utilizar únicamente las palabras clave relacionadas con sismos. En particular, la mención de nombres de países en el texto o en el perfil del usuario es relevante para la detección de sismos de menor magnitud ($< 4.0$), como se puede observar en las tablas \ref{table:global-strict}, \ref{table:local-strict}, \ref{table:super-strict} and \ref{table:moderate}.
+
+Con la señal que considera el idioma del \textit{tweet} dentro de los atributos de interés, se obtenían valores altos de precisión pero valores de \textit{recall} moderados.
+
+También se pudo comprobar que los resultados obtenidos para las señales que incluían información de sentimiento en los atributos de interés no eran útiles en la detección de sismos. Bajo todos los criterios de evaluación, las señales de sentimiento fueron las menos útiles, obteniendo bajos resultados en precisión y \textit{recall}. Sin embargo, este resultado no indica necesariamente que el sentimiento no cambie durante un sismo, ya que los malos resultados pueden ser consecuencia de que el clasificador utilizado no es capaz de detectar correctamente el sentimiento de los mensajes publicados durante un sismo.
+
+
+
+
+ 
 

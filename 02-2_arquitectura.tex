@@ -101,7 +101,7 @@ Los \textit{tweets} recolectados reciben un primer procesamiento encargado de ag
 \item Etiquetado de \textit{tweets} de carácter posiblemente malicioso o casos particulares que perturban el correcto funcionamiento de la detección. Como se describió en anteriormente en \ref{subsec:bots}.%Se marcan los \textit{tweets} publicados por el mismo usuario en un lapso menor a 5 minutos y también \textit{tweets} publicados por usuarios incluidos en una lista negra. La lista negra existe para casos particulares en que se detecten usuarios cuyas publicaciones entorpezcan el correcto funcionamiento de la aplicación (como fue el caso de una cuenta mexicana que todos los días publicaba la lista completa de sismos del día anterior). Esta lista puede ser actualizada sin necesidad de interrumpir los procesos. 
 \end{itemize}
 
-Los metadatos añadidos fueron parte importante del análisis experimental desarrollado. Se detalla un poco más sobre el proceso de extracción de sentimiento en el capítulo \ref{cap:sentimiento} y sobre el proceso de geolocalización en el capítulo \ref{cap:geocodificacion}. Además en el capítulo \ref{cap:analisis} se explica cómo se utilizaron estos datos en el análisis experimental y los resultados obtenidos.
+Los metadatos añadidos fueron parte importante del análisis experimental desarrollado. Se detalla un poco más sobre el proceso de extracción de sentimiento y sobre el proceso de geolocalización en el capítulo \ref{cap:procesamiento}. Además en el capítulo \ref{cap:analisis} se explica cómo se utilizaron estos datos en el análisis experimental y los resultados obtenidos.
 
 Finalmente, luego de procesar cada \textit{tweet}, este es puesto en una cola en memoria RAM para ser utilizado por el módulo 2.
 
@@ -136,7 +136,7 @@ Las tablas de color rosado almacenan la información relacionada con las detecci
 
 Además de las tablas del modelo de la figura~\ref{img:database}, existen otras ``tablas virtuales'' o ``vistas'' destinadas al almacenamiento de datos agregados que son utilizados para la detección de ráfagas y para el almacenamiento de datos precalculados para las visualizaciones.
 %
-En el anexo \ref{anexo:database} se detalla el esquema de la base de datos y los campos que conforman cada tipo de tabla creada.
+En el \nameref{anexo:bd} se detalla el esquema de la base de datos y los campos que conforman cada tipo de tabla creada.
 
 \section{Agrupación de \textit{tweets} y generación de señales}
 
