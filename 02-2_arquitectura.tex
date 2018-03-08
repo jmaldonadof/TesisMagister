@@ -20,7 +20,7 @@ En las siguientes secciones se explica brevemente la función de cada módulo qu
 
 \section{Recolección de datos y pre-procesamiento}
 \label{sec:recoleccion}
-El módulo 1 se encarga de obtener el flujo de \textit{tweets} a medida que estos son publicados en la red social. 
+El \textbf{módulo 1} se encarga de obtener el flujo de \textit{tweets} a medida que estos son publicados en la red social. Para esto se utiliza la API que provee Twitter para acceder a sus datos y algunos criterios de filtrado. 
 
 \subsection{API de Twitter}
 
@@ -182,6 +182,8 @@ En conjunto toda esta información describe un evento, ya que responden a las pr
 
 
 \section{Aplicación Web}
+
+La aplicación Web se compone por dos partes: el servidor Web (módulo 6) y el frontend que se ejecuta en el browser de los usuarios (módulo 7). 
 
 \subsection{Servidor Web}
 El \textbf{módulo 6} corresponde al servidor de la aplicación Web implementado en Python utilizando el \textit{framework} Flask\footnote{\url{http://flask.pocoo.org/}}. El servidor accede directamente a la base de datos y consulta los datos a medida que estos van siendo agregados. Para servir los datos en tiempo real se utiliza un caché con auto-refresco de 1 segundo, que evita sobrecargar el servidor cuando acceden muchas personas al mismo tiempo a la aplicación. 

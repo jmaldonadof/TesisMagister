@@ -7,22 +7,25 @@
 \chapter{Análisis Experimental}
 \label{cap:analisis}
 
-\jm{Introducción del capítulo, objetivos del capítulo}
 En este capítulo se analiza la efectividad de la metodología de detección de sismos propuesta. 
 %
-El análisis realizado comienza identificando la configuración inicial óptima del algoritmo. 
+Como parte de la preparación del experimento, la que detalla en la sección \ref{sec:preparacionExperimento}, se definen los datos con los cuales se realiza la validación (\textit{ground truth}) de los resultados y se realiza un experimento base para identificar la configuración inicial óptima del algoritmo.
+
+
+En la sección \ref{sec:evaluacion} se definen los criterios de evaluación de los resultados, que buscan replicar de la mejor forma posible la evaluación que se realiza en otros estudios del estado del arte y de esta forma poder comparar los resultados de esta metodología con ellos.
 %
-definir los datos con los cuales se realiza la validación (\textit{ground truth}) 
+Luego se procede a evaluar los resultados obtenidos al utilizar diferentes conjuntos de atributos de interés\footnote{Revisar el capítulo \ref{cap:deteccion} para más detalles de la metodología de detección y los conceptos asociados.}.
 
-se comparan los resultados obtenidos al utilizar diferentes conjuntos de atributos de interés\footnote{Revisar el capítulo \ref{cap:deteccion} para más detalles de la metodología de detección y los conceptos asociados}.
-
-
-se comparan los resultados obtenidos considerando una variedad de atributos como elementos de interés.
-
+Finalmente en la sección \ref{sec:discusionEval} se discuten los resultados y la comparación con otros estudios. 
 
 \section{Preparación del experimento}
+\label{sec:preparacionExperimento}
 
-\jm{Introducción de la sección}
+Para evaluar la metodología propuesta se prepara un experimento que evalúa la efectividad de las detecciones a lo largo de un periodo de tiempo de 9 meses. A continuación se especifican los criterios de recolección utilizados y el periodo exacto a evaluar, así como también, los datos que se utilizaron como \textit{ground truth} en la evaluación de la detección en Chile e internacionalmente. 
+
+Además se realiza un pequeño experimento, realizado sobre un subconjunto de los datos, para detectar los valores óptimos de configuración del algoritmo y que luego se utilizaron durante la evaluación completa que considera todos los datos.
+
+Los datos utilizados para el experimento de configuración no están etiquetados manualmente, únicamente son el resultado del proceso de recolección que se detalla en la sección \ref{sec:recoleccion}.
 
 	\subsection{Conjunto de datos de \textit{Twitter}}
 	
@@ -134,6 +137,7 @@ se comparan los resultados obtenidos considerando una variedad de atributos como
 
 		
 \section{Evaluación}
+\label{sec:evaluacion}
 
 En esta sección se presenta la evaluación del método de detección de sismos propuesto. La evaluación se realizó utilizando 5 tipos de variaciones del flujo de entrada $\mathcal{F}$ creado a partir de mensajes que contienen palabras relacionadas con sismos $\mathcal{K}$. Estos 5 tipos de flujos son:
 
@@ -393,4 +397,10 @@ En la tabla \ref{table:othercountries} se listan los resultados obtenidos para d
 \subsection{Falsos Positivos}
 
 Los falsos positivos son poco comunes, algunos ejemplos de detecciones que resultaron ser falsas fueron, durante un concierto de una banda de Pop Coreana en donde muchos usuarios \textit{twittearon} que estaban ``temblando de emoción'', y algunas otras ocasiones, durante simulacros de sismos de carácter masivo. Ambos casos crearon anomalías colectivas en el uso de algunas de las palabras clave y dentro de un rango geográfico específico. En la sección \ref{sec:casosfalsos} se presenta un ejemplo de detección falsa ocasionada por un simulacro de sismo masivo realizado en las islas Filipinas. 
+
+\section{Discusión}
+\label{sec:discusionEval}
+
+\jm{Agregar discusión}
+
 
