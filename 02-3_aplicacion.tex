@@ -44,7 +44,7 @@ En esta sección se explican las visualizaciones.
 	%
 	Además el sistema marca automáticamente los puntos de interés, en este caso, los puntos en donde inicia un sismo. 
 	%
-	Los usuarios pueden interactuar con esta visualización, ya sea seleccionando un rango de tiempo o haciendo \textit{click} en un punto de interés, lo que permite obtener información más detallada de el periodo de tiempo seleccionado. 
+	Los usuarios pueden interactuar con esta visualización, ya sea seleccionando un rango de tiempo o haciendo \textit{click} en un punto de interés, lo que permite obtener información más detallada del período de tiempo seleccionado. 
 	
 	
 	\subsection{Geográficos}
@@ -67,13 +67,21 @@ En esta sección se explican las visualizaciones.
 	  	
 	Como se mencionó en la sección \ref{sec:geocodificacion} se intenta obtener la mayor cantidad posible de información geográfica. 
 	%
-	Esto es muy útil ya que, a pesar de no ser 100\% confiable, entrega una buena aproximación de la percepción de un sismo. 
+	Esto es muy útil ya que entrega una buena aproximación de la percepción de un sismo. 
 	%
 	Saber donde se encuentran los usuarios que reportan un sismo nos permite identificar las áreas afectadas y el alcance geográfico de cada evento. 
 	%
-
 	
-	Para mostrar esta información se utilizan dos tipos de mapas, el primero consiste en un mapa de calor. 
+	
+	Para mostrar esta información se utilizan dos tipos de mapas, el primero consiste en un visualización interactiva del mapa del mundo con marcadores para cada tweet relacionado con alguna localización.
+	%
+	Para una mejor visualización, los datos se agrupan en base a su cercanía y se van separando en grupos más pequeños a medida que el usuario amplía el mapa o hace \textit{click} en cada grupo. 
+	%
+	La figura \ref{fig:worldmap-out} muestra la visualización durante un sismo en Chile y la figura \ref{fig:worldmap-zoom} muestra el mismo instante pero con el mapa ampliado a la zona con mayor número de marcadores.
+	%
+	La visualización permite identificar rápidamente los lugares afectados, en este caso, en el mapa \ref{fig:worldmap-out} se identifica un grupo grande en Chile y a medida que se amplía esa zona, en el mapa \ref{fig:worldmap-zoom} se identifica un grupo numeroso en Concepción (ciudad muy cercana al epicentro) y las ciudades aledañas.
+	
+	El segunto tipo de mapa consiste en un mapa de calor. 
 	%
 	La figura \ref{fig:heatmap} visualiza los datos recolectados durante los 15 minutos posteriores a un evento sísmico ocurrido el 29 de Mayo cerca de Concepción. 
 	%
@@ -86,15 +94,6 @@ En esta sección se explican las visualizaciones.
 	%Sin embargo el usuario tiene la opción de escoger ver el mapa normalizado por población regional, lo que permite observar más claramente que el evento ocurrió más al sur de Chile. 
 	%
 	%El mapa que muestra los mismos datos pero normalizados por región se muestra en la figura \ref{fig:heatmap-normalizado}.
-	
-	
-	El segundo tipo de mapa consiste en un visualización interactiva del mapa del mundo con marcadores para cada tweet relacionado con alguna localización.
-	%
-	Para una mejor visualización, los datos se agrupan en base a su cercanía y se van separando en grupos más pequeños a medida que el usuario amplía el mapa o hace \textit{click} en cada grupo. 
-	%
-	La figura \ref{fig:worldmap-out} muestra la visualización durante un sismo en Chile y la figura \ref{fig:worldmap-zoom} muestra el mismo instante pero con el mapa ampliado a la zona con mayor número de marcadores.
-	%
-	La visualización permite identificar rápidamente los lugares afectados, en este caso, en el mapa \ref{fig:worldmap-out} se identifica un grupo grande en Chile y a medida que se amplía esa zona, en el mapa \ref{fig:worldmap-zoom} se identifica un grupo numeroso en Concepción (ciudad muy cercana al epicentro) y las ciudades aledañas.
 	
 	\begin{figure}[!ht]
 	  \centering
@@ -148,12 +147,12 @@ En ella se observan las visualizaciones descritas en la sección \ref{sec:visual
 	\end{figure}
 
 
-Gracias a las iteraciones y la retroalimentación de los usuarios expertos se pudo identificar algunas mejoras, principalmente en la vista que visualizarán en las pantallas del CSN:
+Gracias a las iteraciones y la retroalimentación de los usuarios expertos se pudo identificar algunas mejoras respecto al diseño de los elementos de la aplicación, principalmente en la vista que visualizarán en las pantallas del CSN:
 
 \begin{enumerate}
 \item Preferencia por el uso de un mapa en el que se distinga el relieve del terreno y las fallas geográficas del borde costero chileno.
 \item Selección de los colores utilizados en el mapa de calor y los marcadores para que no se confundan con los colores del mapa. 
-\item Preferencia por el uso de una paleta de colores oscura para el fondo de la aplicación, debido a que el fondo blanco en las pantallas de monitorización cansa la vista.
+\item Preferencia por el uso de una paleta de colores oscura para el fondo de la aplicación, debido a que el fondo blanco en las pantallas de monitorización producía fatiga visual.
 \end{enumerate}
 
 

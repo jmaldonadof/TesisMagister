@@ -3,7 +3,7 @@
 
 Uno de los objetivos específicos de esta tesis es proveer una metodología no supervisada para detectar la ocurrencia de sismos. 
 %
-Con la finalidad de mejorar el trabajo realizado en estado del arte, se busca que la metodología propuesta permita detectar sismos en cualquier parte del mundo en tiempo cercano al tiempo real y que no dependa de procesos de clasificación supervisada de los mensajes (por lo tanto, que no tenga costos asociados al trabajo de etiquetado). 
+Con la finalidad de contribuir al estado del arte, se busca que la metodología propuesta permita detectar sismos en cualquier parte del mundo en tiempo cercano al tiempo real (entre 0 y 5 minutos) y que no dependa de procesos de clasificación supervisada de los mensajes (por lo tanto, que no tenga costos asociados al trabajo de etiquetado). 
 
 
 El algoritmo utilizado para la detección de sismos es una adaptación de un enfoque no supervisado de detección de anomalías en flujos de texto presentado por Guzmán y Poblete~\cite{guzman2013line}. 
@@ -13,16 +13,16 @@ El algoritmo original permite detectar eventos emergentes al analizar el flujo g
 Esta adaptación formaliza el algoritmo original para ser utilizado para monitorizar 
 %señales de tiempo discretas menos genéricas que son creadas a partir del flujo de mensajes de Twitter
 flujos de mensajes menos genéricos que son creados a partir del flujo de mensajes de Twitter, en este caso en particular, un flujo de mensajes relacionados con sismos.
+
+Se escoge este método porque tiene una complejidad lineal (en relación al número de mensajes de la entrada) y porque la configuración inicial es simple, requiriendo solamente el ajuste de algunos parámetros.
 %
-Se escogió este método porque tiene una complejidad lineal (en relación al número de mensajes de la entrada) y porque la configuración inicial es simple, requiriendo solamente el ajuste de algunos parámetros.
-%
-Mientras que otras técnicas de detección de eventos requieren ajustar periódicamente los parámetros~\cite{mathioudakis2010twittermonitor,sankaranarayanan2009twitterstand} o tienen complejidad computacional mayor, como las propuestas por Zhou et al.~\cite{zhou2015unsupervised} y Zhao et al.~\cite{zhao2014unsupervised} que tienen complejidad polinomial y cuadrática respectivamente. 
+Otras técnicas de detección de eventos requieren ajustar periódicamente los parámetros~\cite{mathioudakis2010twittermonitor,sankaranarayanan2009twitterstand} o tienen complejidad computacional mayor, como las propuestas por Zhou et al.~\cite{zhou2015unsupervised} y Zhao et al.~\cite{zhao2014unsupervised} que tienen complejidad polinomial y cuadrática respectivamente. 
 
 %\jm{Mencioné esto aquí, no sé si es suficiente o si lo pongo además como una nota al pie de página}
 El trabajo descrito en este capítulo y la correspondiente evaluación descrita en el capítulo \ref{cap:analisis}, se realizó en colaboración con Jheser Guzmán como parte de su trabajo de doctorado.
 
 
-\section{Velocidad de Llegada Relativa}
+\section{Velocidad de llegada relativa}
 
 El algoritmo original propuesto por Guzmán y Poblete se basa en comparar ventanas de tiempo consecutivas y detectar variaciones considerables entre la velocidad de llegada relativa calculada para las palabras que componen los mensajes en cada ventana de tiempo.
 
@@ -54,13 +54,15 @@ Originalmente, en el método propuesto por Guzman y Poblete, la ``explosividad''
 %
 La salida es una lista de los top-\emph{k} términos ordenados en orden decreciente según el cambio de su velocidad de llegada relativa ($\lambda$).
 %
-Esto no es suficiente para el propósito de la detección de sismos, ya que, como se detalló en la sección \ref{sec:recoleccion}, los datos que conforman el flujo fueron seleccionados a partir de palabras clave y datos geográficos. 
+Pero esto no es suficiente para el propósito de la detección de sismos. 
+
+Para el caso de la detección de sismos los datos que conforman el flujo se seleccionan a partir de palabras clave\footnote{El proceso de recolección se detalla en la sección \ref{sec:recoleccion}.}. 
 %
-Ocasionando que, para este caso particular, se requiera monitorizar un flujo sesgado en el que hay pocas palabras muy frecuentemente usadas (menos de \emph{k} palabras) y que experimentan pequeños cambios en cada ventana de tiempo debido a fluctuaciones al azar en los datos de entrada (i.e., ruido).
+Esto implica que el flujo a monitorear sea un flujo sesgado, en el que hay pocas palabras muy frecuentemente usadas (menos de \emph{k} palabras) y que experimentan pequeños cambios en cada ventana de tiempo debido a fluctuaciones al azar en los datos de entrada (i.e., ruido).
 %
 Por lo tanto, si se reportan las top-\emph{k} palabras más ``explosivas'' podría significar tener reportes en cada ventana de tiempo.
 %
-Es por esto, que para reportar sismos automáticamente se necesita estimar, de forma confiable, cuándo un cambio es significativo y por tanto indica actividad inusual.
+Es por esto, que para reportar sismos automáticamente se necesita estimar, de forma confiable, cuándo un cambio es significativo y por lo tanto indica actividad inusual.
 
 \begin{figure}[h]
 \minipage{0.46\textwidth}
@@ -81,7 +83,7 @@ nguyen2013event}.
 %
 Esta idea asume y requiere que la velocidad de llegada relativa ($\lambda$) tenga una distribución exponencial. 
 %
-Sin embargo, un análisis empírico cuyo resultado se muestra en la figura ~\ref{fig:data_distribution1}, usando el conjunto de datos recolectados durante un periodo de 9 meses, desde el 25 de Enero al 25 de Octubre del 2016, indica que esto no se cumple para el caso de la distribución de la velocidad de llegada de las palabras relacionadas con sismos.
+Sin embargo, un análisis empírico cuyo resultado se muestra en la figura ~\ref{fig:data_distribution1}, usando el conjunto de datos recolectados durante un período de 9 meses desde el 25 de Enero al 25 de Octubre del 2016, indica que esto no se cumple para el caso de la distribución de la velocidad de llegada de las palabras relacionadas con sismos.
 %
 Esta observación hizo necesario un análisis para identificar como adaptar el algoritmo a los propósitos descritos en esta tesis.
 

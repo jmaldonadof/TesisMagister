@@ -23,7 +23,7 @@ El porcentaje de usuarios de Twitter que tienen activada la opción de compartir
 %
 Sin embargo, existen otros datos asociados a un \textit{tweet} que nos permiten inferir una posible ubicación desde la cual se publica ese mensaje. 
 %
-Estos datos no son 100\% confiables ni precisos y tampoco están disponibles para todos los \textit{tweets}, pero sin duda aumentan el porcentaje de \textit{tweets} para los cuales podemos aproximar una localidad llegando hasta un 80\%.
+Estos datos no son 100\% confiables ni precisos y tampoco están disponibles para todos los \textit{tweets}, pero sin duda aumentan el porcentaje de \textit{tweets} para los cuales podemos aproximar una localidad, llegando hasta un 80\%.
 
 
 Las formas en que se obtuvo información relacionada a la localidad de un \textit{tweet} son:
@@ -44,13 +44,13 @@ En los pocos casos de \textit{tweets} que contienen información GPS, la geoloca
 Sin embargo, para los casos descritos en los puntos 2, 3 y 4, es necesario realizar procedimientos extra. 
 
 
-Para extraer la información de localización que se indica en los puntos 3. y 4. es necesario encontrar menciones de localidades en el texto del campo de localidad del usuario y en el corpus del \textit{tweet}.  
+Para extraer la información de localización que se indica en los puntos 3 y 4 es necesario encontrar menciones de localidades en el texto del campo de localidad del usuario y en el corpus del \textit{tweet}.  
 %
 Para esa tarea se utiliza un listado de nombres de países y sus traducciones a diferentes idiomas. 
 %
 Además, se cuenta con un listado de ciudades chilenas y de ciudades japonesas, que permite obtener información más detallada sobre localidades dentro de Chile y Japón, dos países altamente sísmicos y con un masivo uso de Twitter. 
 %
-Para encontrar las menciones se analiza el texto buscando ocurrencias de países en primer lugar, si el texto no contiene información de ningún país y el \textit{tweet} está escrito en español, se buscan nombres de ciudades chilenas. De la misma forma, para el caso de los \textit{tweets} escritos en japonés, se buscan nombres de ciudades de japón. 
+Para encontrar las menciones se analiza el texto buscando ocurrencias de países en primer lugar, si el texto no contiene información de ningún país y el \textit{tweet} está escrito en español, se buscan nombres de ciudades chilenas. %De la misma forma, para el caso de los \textit{tweets} escritos en japonés, se buscan nombres de ciudades de japón. 
 %
 Esto se puede extender para otros países de los cuales se quiera obtener información más detallada. Pero en esta tesis se evitó, porque las coincidencias entre nombres de ciudades de diferentes países puede causar problemas en los resultados obtenidos. 
 %
@@ -72,18 +72,16 @@ Un trabajo similar de inferencia de geolocalización al desarrollado en esta tes
 \label{sec:sentimiento}
 
 %
-El análisis de sentimiento, de forma general, se basa en la idea utilizar técnicas de procesamiento de lenguaje natural, análisis de texto y lingüística computacional, para extraer, cuantificar y estudiar estados afectivos e información subjetiva. 
+El análisis de sentimiento, de forma general, se basa en la idea de utilizar técnicas de procesamiento de lenguaje natural, análisis de texto y lingüística computacional, para extraer, cuantificar y estudiar estados afectivos e información subjetiva. 
 %
-En particular en esta tesis se ejecutó una tarea básica en análisis de sentimientos que consiste en clasificar la polaridad de un texto.
+En particular en esta tesis se ejecutó una tarea básica en análisis de sentimientos que consiste en clasificar la polaridad de un texto, donde los polos son sentimiento positivo o sentimiento negativo. 
 
 
-La información obtenida fue utilizada a modo de experimentación. 
+%La información obtenida fue utilizada a modo de experimentación y 
 %
-En en análisis descrito en el \ref{cap:analisis} se evaluó si al crear señales considerando la polaridad dentro de los atributos de interés $K$  mejoraba la detección al ocurrir un sismo. 
+%En el análisis que se describe en el capítulo \ref{cap:analisis} se evaluó si al crear señales considerando la polaridad dentro de los atributos de interés $K$  mejoraba la detección al ocurrir un sismo. 
 %
-La información extraída mediante esta técnica es almacenada en la base de datos. 
-%
-De esta forma, queda a disposición en caso de ser útil en estudios posteriores que busquen estimar la intensidad de un evento o hacer un análisis diferente. 
+La información extraída mediante esta técnica se almacenó en una base de datos, quedando a disposición en caso de ser útil en estudios posteriores que busquen estimar la intensidad de un evento o hacer un análisis diferente. 
 
 
 Para clasificar la polaridad del \textit{tweet} se utilizó el algoritmo SentiStreigth\footnote{\url{http://sentistrength.wlv.ac.uk}} en su versión para Java. 
@@ -97,7 +95,7 @@ SentiStrength reporta dos puntajes correspondientes a la fuerza del sentimiento:
 1 (no positivo) a 5 (extremadamente positivo)
 \end{center}
 
-La razón por la que se reportan dos puntajes, es porque estudios sicológicos han demostrado que las personas procesan los sentimientos positivos y negativos en paralelo, como emociones mixtas.
+Como se detalla en la documentación de la página Web de SentiStreigh, la razón por la que se reportan dos puntajes, es porque estudios sicológicos han demostrado que las personas procesan los sentimientos positivos y negativos en paralelo, como emociones mixtas.
 %
 Este algoritmo puede ser configurado para ser utilizado con textos en finlandés, alemán, holandés, español, ruso, portugués, francés, árabe, polaco, persa, sueco, griego, galés, italiano y turco. 
 %

@@ -12,9 +12,9 @@ En este capítulo se describe la arquitectura del sistema desarrollado. El siste
 
 La figura \ref{img:arquitectura} es un esquema de los módulos que conforman el sistema y la forma en que cada uno interactúa con los demás. 
 %
-Cabe destacar que la experimentación fue una parte importante de este trabajo de tesis. Es por esto que algunos de los procesos generan información que fue evaluada durante la etapa de análisis y que, en base a los resultados obtenidos, se tomó la decisión de no incluirla en las visualizaciones. 
+Cabe destacar que la experimentación fue una parte importante de este trabajo de tesis, es por esto que algunos de los procesos generan información que fue evaluada durante la etapa de análisis y que, en base a los resultados obtenidos, se tomó la decisión de no incluirla en las visualizaciones de la aplicación Web. 
 %
-Sin embargo, toda la información generada quedó almacenada de forma ordenada para investigaciones futuras. 
+Sin embargo, toda la información generada quedó almacenada en una base de datos en los servidores del Centro de Investigación de la Web Semántica para ser utilizada en investigaciones futuras. 
 
 En las siguientes secciones se explica brevemente la función de cada módulo que compone el sistema.
 
@@ -39,7 +39,7 @@ Mediante el uso de la API para acceder al \textit{stream} es posible obtener los
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\linewidth]{imagenes/boundingbox.pdf}
-	\caption{Cuadro de delimitación geográfica utilizado para recolectar \textit{tweets} de Chile.}
+	\caption{Cuadro de delimitación geográfica utilizado para complementar la recolección y obtener una mayor cantidad de información geolocalizada de Chile.}
 	\label{img:boundingbox}
 \end{figure}
 
@@ -50,11 +50,18 @@ Para obtener los datos, se filtró el flujo de mensajes para obtener todos los \
 Las palabras clave corresponden a las traducciones de ``temblor'', ``sismo'' y ``terremoto'' en diferentes idiomas. 
 %
 La lista completa de palabras clave utilizadas se encuentran listadas en la figura \ref{img:keywords} en el capítulo \ref{cap:analisis}. 
+%
+Este criterio permite obtener \textit{tweets} provenientes de cualquier parte del mundo.
 
 %
 Además del filtro por palabras clave, se agrega un filtro (OR lógico) en forma de cuadro de límite geográfico que rodea todo el territorio nacional, tal como se muestra en la figura \ref{img:boundingbox}.
 %
-De esta forma se obtiene una muestra representativa de reportes de sismos en el mundo y de \textit{tweets} publicados por usuarios Chilenos geolocalizados que nos permiten mejorar la caracterización de sismos en Chile.
+Con este criterio se obtiene una mayor cantidad de mensajes publicados por usuarios chilenos con información de geolocalización que permiten mejorar la caracterización de sismos en Chile.
+%
+Este filtro se puede modificar o extender para incluir otras áreas geográficas que requieran mayor atención, por ejemplo, otros países con alta sísmicidad. 
+
+
+Con esta forma de selección se obtiene una muestra representativa de reportes de sismos en el mundo e información más detallada de publicaciones hechas por usuarios en Chile, permitiendo brindar mejor soporte a la detección nacional.
 
 
 Los \textit{tweets} que conforman el flujo de Twitter no son descartados como en soluciones similares~\cite{avvenuti2014ears}. 
@@ -70,7 +77,7 @@ Una tarea crucial para la detección y la descripción de cada evento es la de s
 %
 Esta tarea es relativamente simple para casi todos los idiomas cuando se usan los elementos específicos de separación para cada uno (por ejemplo: espacios, puntos, comas, apóstrofes, etc.).
 % 
-Sin embargo, para idiomas que no utilizan signos de separación es más complejo. 
+Sin embargo, para idiomas que no utilizan signos de separación es más complejo.
 %
 Este es el caso del idioma chino, para el cual se utilizó la biblioteca {\em Stanford NLP Chinese Word Segmentation}\footnote{\url{http://nlp.stanford.edu/projects/chinese-nlp.shtml}}.
 
@@ -86,7 +93,7 @@ Usuarios con malas intenciones también pueden utilizar este mecanismo para difu
 %
 Para evitar este problema, al momento de recolectar los \textit{tweets}, se añade una \textit{etiqueta} a los \textit{tweets} publicados por el mismo usuario en un periodo inferior a 5 minutos desde que publicó el mensaje previo, para luego no considerarlos en la detección. 
 %
-Si ocurre un sismo, se espera que éste sea reportado por varios usuarios en la misma ubicación geográfica, por lo que la detección no se verá afectada por este filtro.
+Si ocurre un sismo, se espera que este sea reportado por varios usuarios en la misma ubicación geográfica, por lo que la detección no se verá afectada por este filtro.
 
 %
 %Para obtener los datos se utiliza la API para acceder al \textit{stream} público de Twitter\footnote{\url{https://dev.twitter.com/streaming/public}} y una librería en Java\footnote{\url{http://twitter4j.org/}} que integra el servicio con la aplicación.
@@ -98,7 +105,7 @@ Los \textit{tweets} recolectados reciben un primer procesamiento encargado de ag
 \begin{itemize}
 \item La ejecución del algoritmo SentiStreigth\footnote{\url{http://sentistrength.wlv.ac.uk}} para calcular el sentimiento del mensaje.
 \item La búsqueda de menciones de nombres de países en diferentes idiomas en el mensaje y en los campos que incluyen información de localidad del usuario. En el resto del documento nos referimos a este proceso como proceso de geolocalización.
-\item Etiquetado de \textit{tweets} de carácter posiblemente malicioso o casos particulares que perturban el correcto funcionamiento de la detección. Como se describió en anteriormente en \ref{subsec:bots}.%Se marcan los \textit{tweets} publicados por el mismo usuario en un lapso menor a 5 minutos y también \textit{tweets} publicados por usuarios incluidos en una lista negra. La lista negra existe para casos particulares en que se detecten usuarios cuyas publicaciones entorpezcan el correcto funcionamiento de la aplicación (como fue el caso de una cuenta mexicana que todos los días publicaba la lista completa de sismos del día anterior). Esta lista puede ser actualizada sin necesidad de interrumpir los procesos. 
+\item Etiquetado de \textit{tweets} de carácter posiblemente malicioso o casos particulares que perturban el correcto funcionamiento de la detección, como se describió en anteriormente en \ref{subsec:bots}.%Se marcan los \textit{tweets} publicados por el mismo usuario en un lapso menor a 5 minutos y también \textit{tweets} publicados por usuarios incluidos en una lista negra. La lista negra existe para casos particulares en que se detecten usuarios cuyas publicaciones entorpezcan el correcto funcionamiento de la aplicación (como fue el caso de una cuenta mexicana que todos los días publicaba la lista completa de sismos del día anterior). Esta lista puede ser actualizada sin necesidad de interrumpir los procesos. 
 \end{itemize}
 
 Los metadatos añadidos fueron parte importante del análisis experimental desarrollado. Se detalla un poco más sobre el proceso de extracción de sentimiento y sobre el proceso de geolocalización en el capítulo \ref{cap:procesamiento}. Además en el capítulo \ref{cap:analisis} se explica cómo se utilizaron estos datos en el análisis experimental y los resultados obtenidos.
@@ -125,8 +132,8 @@ Las tablas de color amarillo almacenan información relacionada al \textit{tweet
 %
 Los campos de estas tablas guardan información, en su mayoría, proveniente directamente desde Twitter.
 %
-Algunos de los datos almacenamos en estas tablas son generados en el módulo de pre-procesamiento, como la información de geolocalización y una etiqueta que indican si el \textit{tweet} fue publicado por un mismo usuario en un corto periodo de tiempo.
-%
+Algunos de los datos almacenados en estas tablas son generados en el módulo de pre-procesamiento, como la información de geolocalización y una etiqueta que indican si el \textit{tweet} fue publicado por un mismo usuario en un corto periodo de tiempo.
+
 Las tablas de color verde almacenan otra información generada por el sistema.
 %
 Una de ellas almacena un índice invertido de las palabras que conforman el texto de los \textit{tweet} y la otra almacena el resultado del análisis de sentimiento para cada \textit{tweet}. 
@@ -136,7 +143,7 @@ Las tablas de color rosado almacenan la información relacionada con las detecci
 
 Además de las tablas del modelo de la figura~\ref{img:database}, existen otras ``tablas virtuales'' o ``vistas'' destinadas al almacenamiento de datos agregados que son utilizados para la detección de ráfagas y para el almacenamiento de datos precalculados para las visualizaciones.
 %
-En el \nameref{anexo:bd} se detalla el esquema de la base de datos y los campos que conforman cada tipo de tabla creada.
+%En el \nameref{anexo:bd} se detalla el esquema de la base de datos y los campos que conforman cada tipo de tabla creada.
 
 \section{Agrupación de \textit{tweets} y generación de señales}
 
@@ -179,6 +186,8 @@ El \textbf{módulo 5} se encarga de la descripción de eventos, es decir, se enc
 Con esta información se complementa la información temporal y geográfica asociada a esa ventana de tiempo.
 %
 En conjunto toda esta información describe un evento, ya que responden a las preguntas sobre el cuándo, dónde y qué es lo que pasó específicamente en cada evento detectado.
+%
+En el capítulo \ref{cap:casos} se muestra un breve análisis para algunos casos de eventos sísmicos detectados  donde se responden a estas preguntas.  
 
 
 \section{Aplicación Web}

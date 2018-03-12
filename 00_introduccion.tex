@@ -11,7 +11,7 @@
 \chapter{Introducción}
 
 \section{Contexto}
-Para muchos países, es muy importante estar preparados en caso de que ocurra un sismo y de esta forma evitar el daño producido.
+Para muchos países, es importante estar preparados en caso de que ocurra un sismo y de esta forma reducir el daño producido.
 %
 Países como Japón, China, Estados Unidos y Chile, entre otros, invierten gran cantidad de recursos en el estudio de terremotos y hay una constante necesidad de métodos novedosos para recolectar información rápidamente durante los momentos de crisis.
 %
@@ -23,16 +23,16 @@ Con la información proveniente de estos sensores se puede determinar, en cierto
 %
 Sin embargo, esta estimación no es muy exacta, ya que la intensidad no sólo depende de la fuerza del sismo (magnitud) sino que también de la distancia epicentral, la geología local, la naturaleza del terreno y el tipo de construcciones del lugar.
 %
-Para obtener información más certera se requiere que personal capacitado valide que un sismo percibido por un sensor corresponde a un sismo sensible\footnote{Sismo percibido por personas en alguna parte} o no. 
+Para obtener información más certera se requiere que personal capacitado valide que un sismo percibido por un sensor corresponde a un sismo sensible\footnote{Sismo sensible: sismo percibido por personas en alguna parte.} o no. 
 %
-En Chile esta tarea recae en voluntarios de las oficinas de emergencia nacionales (ONEMI)\footnote{http://www.onemi.cl/}, quienes envían un reporte con la intensidad que percibieron en el área geográfica en la que se encuentran; 
+En Chile esta tarea recae en voluntarios de las oficinas de emergencia nacionales (ONEMI)\footnote{http://www.onemi.cl/}, quienes envían un reporte con la intensidad que percibieron en el área geográfica en la que se encuentran,
 %
 y en otros países existen iniciativas que, por medio del \textit{crowdsourcing}\footnote{La práctica de obtener información o aportes en una tarea mediante la colaboración de personas, ya sea mediante un contrato remunerado o de manera voluntaria y generalmente a través de internet.}, determinan si el sismo fue perceptible~\cite{atkinson2007did}.
 %
 Esta información es valiosa porque permite a sismólogos estimar de mejor manera la fuerza con que un sismo fue percibido, el daño causado y el área de impacto, así como también establecer relaciones entre el tamaño de un sismo y los factores antes mencionados. 
 
 
-Cabe destacar que, sin importar si un sismo es de alta o baja magnitud, su estudio y caracterización, le permite a los expertos obtener conocimiento sobre la actividad sísmica de ciertas regiones y construir catálogos muy completos sobre sismos en el mundo~\cite{stein2009introduction}.
+Cabe destacar que, sin importar si un sismo es de alta o baja magnitud, su estudio y caracterización, le permite a los expertos obtener conocimiento sobre la actividad sísmica de ciertas regiones y construir catálogos más completos sobre sismos en el mundo~\cite{stein2009introduction}.
 %
 Las oficinas de emergencia nacionales se esfuerzan en determinar la intensidad de un sismo en todas los lugares donde este fue percibido, incluso si se trata de un sismo pequeño. 
 %
@@ -43,9 +43,9 @@ Finalmente y a modo de observación, los sensores sísmicos son artefactos costo
 
 En esta tesis se propone la utilización de una fuente de información no convencional, para desarrollar una herramienta de soporte de decisiones durante eventos sísmicos.
 %
-En particular, el trabajo se basa en la utilización de Twitter\footnote{\url{https://www.twitter.com}}, una red social de microblogging, la cual se caracteriza por sus mensajes de máximo 140 caracteres (llamados {\em tweets})\footnote{El 8 de Noviembre del 2017 el número de caracteres ha aumentado a 280.}.
+En particular, el trabajo se basa en la utilización de Twitter\footnote{\url{https://www.twitter.com}}, una red social de microblogging, la cual se caracteriza por sus mensajes de máximo 280 caracteres (llamados {\em tweets})\footnote{El 8 de Noviembre del 2017 el número de caracteres aumentó a 280, anteriormente los tweets tenían un largo máximo de 140 carácteres.}.
 %
-Esta red social es utilizada actualmente por más de 328 millones de usuarios activos mensuales~\cite{abouttwitter} que publican mensajes y propagan información en tiempo real, abarcando desde noticias de última hora sobre eventos muy importantes hasta actualizaciones mundanas y personales.
+Esta red social es utilizada actualmente por más de 328 millones de usuarios activos mensuales~\cite{abouttwitter} que publican mensajes y propagan información en tiempo real, abarcando desde noticias de última hora sobre eventos importantes hasta actualizaciones mundanas y personales.
 %
 Además, alrededor del 80\% de los usuarios de Twitter acceden al servicio utilizando sus dispositivos móviles, lo que contribuye a la inmediatez de la difusión de la información. 
 %
@@ -60,7 +60,7 @@ Los usuarios de redes sociales, o los llamados ``sensores ciudadanos'' o ``senso
 %
 Desde ese momento, varios estudios han abordado el problema de detección y descripción de sismos usando datos de redes sociales~\cite{avvenuti2014ears,cameron2012emergency,earle2010omg,earle2012twitter}. 
 %
-En particular, Young et al.~\cite{young2013transforming} presentaron un caso de estudio de la necesidad de aprovechar los datos de sensores sociales en la investigación sismológica, y cómo esto puede puede proveer información de calidad de bajo costo para áreas que no están bien cubiertas por los métodos existentes de recolección de información.
+En particular, Young et al.~\cite{young2013transforming} presentaron un caso de estudio de la necesidad de aprovechar los datos de sensores sociales en la investigación sismológica, y cómo esto puede puede proveer información de calidad de bajo costo para áreas que no están completamente cubiertas por los métodos existentes de recolección de información.
 
 
 A pesar de la utilidad de usar los datos de redes sociales para la detección y descripción de sismos, la revisión al estado del arte muestra que el problema no está resuelto en términos de precisión, {\em recall} y cobertura geográfica~\cite{young2013transforming}.
@@ -110,9 +110,9 @@ Tampoco hay sistemas disponibles públicamente para detectar sismos en el mundo 
 
 \section{Metodología de Trabajo}
 
-Para la realización de este trabajo, se utilizó una metodología ágil que permitió implementar prototipos funcionales, los cuales eran testeados por los usuarios expertos (Sismólogos del Centro Sismológico Nacional), mientras tanto, en paralelo se realizaban los análisis experimentales que validan la tesis. Además esto permitió incorporar mejoras basadas en las opiniones de los usuarios para luego difundir la aplicación para un uso masivo. 
-
 El trabajo se divide en tres etapas importantes. La primera etapa está enfocada en el desarrollo de una primera versión del sistema de detección de sismos y de la aplicación Web que visualiza la información obtenida en tiempo real. El fruto de este trabajo es un prototipo básico que permite comenzar con la recolección de datos y brinda a los usuarios un primer producto valioso. La segunda etapa se enfoca en el estudio y mejora del sistema de detección automática y en el estudio de los datos recolectados. Esta segunda etapa permite validar la eficacia de la detección y mejorar la eficiencia. La tercera etapa consiste en extender la aplicación Web para incorporar la opción de explorar eventos pasados e incorporar mejoras en base a los resultados del análisis experimental y de las opiniones entregadas por los usuarios durante el periodo de pruebas.
+
+Las etapas que se describen a continuación permitieron implementar prototipos funcionales, los cuales eran testeados por los usuarios expertos (Sismólogos del Centro Sismológico Nacional), mientras tanto, en paralelo se realizaban los análisis experimentales que validaban la tesis. Además esto permitió incorporar mejoras basadas en las opiniones de los usuarios para luego difundir la aplicación para un uso masivo. 
 
 A continuación se detallan las tareas principales abordadas en cada etapa.
 
@@ -121,10 +121,10 @@ A continuación se detallan las tareas principales abordadas en cada etapa.
 uguz
 \begin{itemize}
 
-\item Puesta en marcha de un sistema de recolección continua de \textit{tweets} que contengan la palabra sismo, temblor o terremoto en diferentes idiomas. 
+\item Puesta en marcha de un sistema de recolección continua de \textit{tweets} que contengan la palabra ``sismo'', ``temblor'' o ``terremoto'' en diferentes idiomas. 
 \item Adaptación del detector de ráfagas a partir del \textit{stream} de \textit{Twitter} que proponen J. Guzmán y B. Poblete \cite{guzman2013line} para su utilización sobre los datos recolectados sobre sismos.
 \item Implementación de una aplicación Web que visualice en tiempo real los datos recolectados a través de una serie temporal de frecuencia de \textit{tweets}, un listado con los \textit{tweets} recolectados y un mapa con los \textit{tweets} y usuarios que tengan información geográfica.
-\item Inicio del periodo de marcha blanca en la que los usuarios expertos validan el prototipo.
+\item Inicio del período de marcha blanca en la que los usuarios expertos validan el prototipo.
 
 \end{itemize}
 
@@ -146,13 +146,13 @@ uguz
 %\setcounter{enumi}{6}
 \item Incluir información de detecciones automáticas a la aplicación Web.
 \item Incorporar mejoras basadas en las opiniones de los usuarios y comportamiento observado durante la marcha blanca.
-\item Incorporar la opción de explorar eventos pasados a la aplicación Web.
+\item Incorporar la funcionalidad para explorar eventos pasados en la aplicación Web.
 
 \end{itemize}
 
 \section{Principales Desafíos}
 
-El principal desafío consistió en lograr que la solución fuera tolerante al ruido de los datos y de esta forma permitiera detectar sismos en diferentes lugares del mundo. 
+El principal desafío consistió en lograr que la solución fuera tolerante al ruido de los datos y que de esta forma permitiera detectar sismos en diferentes lugares del mundo. 
 %
 Lograr un equilibrio entre la precisión y el {\em recall} para sismos de diferente magnitud y en diferentes lugares del mundo es una tarea que hasta el momento no había sido resuelta utilizando las técnicas propuestas del estado del arte. 
 %
@@ -181,19 +181,19 @@ El enfoque es simple, requiere pocos recursos computacionales y permite realizar
 Se implementó un sistema de visualización Web que utiliza la información proveniente de sensores sociales y marca los eventos ocurridos en base a las detecciones realizadas por el algoritmo de detección. 
 %
 La herramienta bautizada como Twicalli\footnote{término acuñado por M. Strohmaier~\cite{Strohmaier2010Twicalli}.\\Sistema disponible en \url{http://twicalli.cl}}, 
-se encuentra públicamente disponible y es utilizada actualmente, como herramienta de soporte de decisiones, por el Centro Sismológico Nacional (CSN) y por el Servicio Hidrográfico y Oceanográfico de la Armada Chilena (SHOA).
+se encuentra públicamente disponible y es utilizada actualmente como herramienta de soporte de decisiones por el Centro Sismológico Nacional (CSN) y por el Servicio Hidrográfico y Oceanográfico de la Armada Chilena (SHOA).
 
 
 El método propuesto basa su análisis en el procesamiento de señales creadas mediante la agregación de los mensajes relacionados con sismos. 
 %
 El procesamiento considera, entre otros, la velocidad de llegada de los mensajes asociados a diferentes localidades mencionadas en el texto del mensaje o localidades asociadas al usuario.
 %
-Esto permite al usuario del sistema, por ejemplo, desambiguar entre diferentes eventos que ocurren simultáneamente en diferentes lugares del mundo o separados por un lapso mínimo de tiempo.
+Esto permite al usuario del sistema, por ejemplo, distinguir entre eventos diferentes que ocurren simultáneamente en lugares diferentes o separados por un lapso de tiempo mínimo.
 %
-Esta desambiguación no es fácil de realizar usando sismógrafos~\cite{kennett1991traveltimes,sambridge2001seismic}.
+%Diferenciar eventos simultáneos no es fácil de realizar usando sismógrafos~\cite{kennett1991traveltimes,sambridge2001seismic}.
 
 
-Se realizó una evaluación cuantitativa del algoritmo de detección sobre un periodo de 9 meses usando varios criterios y catálogos de datos reales de sismos. 
+Se realizó una evaluación cuantitativa del algoritmo de detección sobre un período de 9 meses usando varios criterios y catálogos de datos reales de sismos. 
 %
 La evaluación realizada es la más larga realizada hasta la fecha para este tipo de sistemas.
 
@@ -202,9 +202,9 @@ Los resultados obtenidos son muy competitivos, alcanzando una precisión de $0.9
 %
 Para sismos de magnitud $\leq 4.0$, la mayoría de ellos no sentidos por las personas (y por lo tanto no detectados por sensores sociales), se alcanzó una precisión de $1.00$ y \textit{recall} de $0.15$ (F-measure de $0.26$).
 %
-Estos resultados superan significativamente a la mayoría de los resultados reportados por otros sistemas supervisados y no supervisados de estudios similares.
+Estos resultados superan significativamente a la mayoría de los reportados por otros sistemas supervisados y no supervisados de estudios similares.
 %
-En el único caso en que el sistema propuesto obtiene resultados cercanos, pero que no superan al sistema con el cual se compara, se compensa debido a que el sistema propuesto detecta sismos en todo el mundo de manera no supervisada mientras que el sistema con el cual se compara lo hace de forma supervisada y en un solo país.
+En el único caso en que el sistema propuesto obtiene resultados cercanos, pero que no superan al sistema con el cual se compara (EARS\cite{avvenuti2014ears}), se compensa debido a que el sistema propuesto detecta sismos en todo el mundo de manera no supervisada mientras que el sistema con el cual se compara lo hace de forma supervisada y en un solo país.
 
 
 \section{Organización del Documento}

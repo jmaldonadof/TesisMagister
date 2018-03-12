@@ -35,7 +35,7 @@ Los datos utilizados para el experimento de configuración no están etiquetados
 		
 	\subsection{Conjuntos de datos utilizados como \textit{Ground Truth}}
 	
-		Para verificar los resultados se utilizaron catálogos de sismos disponibles públicamente, uno correspondiente a una red de sensores global y otro a una red de sensores local. Se utilizaron las detecciones correspondientes al mismo periodo de 9 meses del conjunto de datos recolectados desde \textit{Twitter}. Ambos catálogos se constituyen por reportes oficiales y describen la localidad estimada del epicentro del sismo y la magnitud ~\cite{usgs:magnitude}.
+		Para verificar los resultados se utilizaron catálogos de sismos disponibles públicamente, uno correspondiente a una red de sensores global y otro a una red de sensores local. Se utilizaron las detecciones correspondientes al mismo periodo de 9 meses del conjunto de datos recolectados desde \textit{Twitter}. Ambos catálogos están constituidos por reportes oficiales y describen la localidad estimada del epicentro del sismo y la magnitud ~\cite{usgs:magnitude}.
 		
 \begin{description}
 \item[Global (USGS):] 
@@ -47,7 +47,7 @@ Los datos utilizados para el experimento de configuración no están etiquetados
 		
 \end{description}
 		
-		Cabe destacar que durante el periodo de estudio, el GUC reportó 1.373 sismos en Chile ($\geq$ $3.6$) y el USGS reportó sólo 436 sismos en Chile con la misma magnitud (sólo 32\% de cobertura). Esto corrobora la necesidad de tener fuentes de información complementaria para completar la cobertura de sismos en áreas que no están bien cubiertas por las redes de sismología globales o locales. 
+		Cabe destacar que durante el período de estudio, el GUC reportó 1.373 sismos en Chile ($\geq$ $3.6$) y el USGS reportó sólo 436 sismos en Chile con la misma magnitud (sólo 32\% de cobertura). Esto corrobora la necesidad de tener fuentes de información complementaria para completar la cobertura de sismos en áreas que no están del todo cubiertas por las redes de sismología globales o locales. 
 		
 	\subsection{Ajuste de parámetros iniciales óptimos}
 
@@ -58,7 +58,7 @@ Los datos utilizados para el experimento de configuración no están etiquetados
 		\item El tamaño de la ventana de tiempo ($T$).
 	\end{enumerate}
 	
-	A continuación se detalla cómo se determinaron los valores utilizados para realizar la configuración inicial de cada uno de estos parámetros. 
+	A continuación se detalla cómo se determinaron los valores utilizados para realizar la configuración inicial del sistema. 
 
 	\subsubsection*{1. Umbral para detectar sismos ($\theta$)}
 	%
@@ -106,13 +106,6 @@ Los datos utilizados para el experimento de configuración no están etiquetados
 	\item País mencionado en la localidad de perfil del usuario que escribió el \textit{tweet}.
 	\end{itemize}
 
-	\begin{figure}[ht]
-  	\centering
-  	\includegraphics[trim={5 0 5 10}, clip, width=\textwidth]{imagenes/02_Poise_Analysis_WindowSize_solo.pdf}
-  	\caption{Desviación estándar relativa de la señal que considera las palabras clave relacionadas con sismos para diferentes tamaños de ventana de tiempo (en segundos)}
-	\label{fig:window_size}
-	\end{figure}
-
 	\subsubsection*{(3) Tamaño de la ventana de tiempo ($T$)} 
 	El tamaño de la ventana corresponde al largo del tiempo (en segundos) de cada conjunto de \textit{tweets} en los cuales son divididos los datos de la entrada para ser procesados por el algoritmo.
 	%
@@ -132,6 +125,13 @@ Los datos utilizados para el experimento de configuración no están etiquetados
 	\item Se repite este proceso para diferentes tamaños de ventana $T$ en el rango de $0$ hasta $3\,600$ segundos (una hora) para un periodo de 2 meses y se selecciona el $T$ con la desviación estándar relativa más pequeña. En este caso el valor de tamaño de ventana que minimiza la desviación estándar corresponde a los valores para $T \geq 300$ segundos, tal como se muestra en la figura~\ref{fig:window_size}.
 
 	\end{itemize}
+	
+	\begin{figure}[ht]
+  	\centering
+  	\includegraphics[trim={5 0 5 10}, clip, width=\textwidth]{imagenes/02_Poise_Analysis_WindowSize_solo.pdf}
+  	\caption{Desviación estándar relativa de la señal que considera las palabras clave relacionadas con sismos para diferentes tamaños de ventana de tiempo (en segundos)}
+	\label{fig:window_size}
+	\end{figure}
 
 	Además, para disminuir los tiempos de detección, el sistema ejecuta dos procesos paralelos idénticos desfasados en $150$ segundos uno del otro y con ello asegurar un tiempo de detección de máximo 5 minutos. 
 
@@ -143,24 +143,31 @@ En esta sección se presenta la evaluación del método de detección de sismos 
 
 \begin{description}
 
-\item[Palabras clave de sismos:] Este flujo de mensajes genera una señal que representa la velocidad de llegada relativa de mensajes que contienen algún elemento en $\mathcal{K}$, donde $\mathcal{K}$ corresponde a la lista de palabras relacionadas con sismos. 
-\item[Geolocalización a partir del texto:] Los \textit{tweets} seleccionados usando las palabras clave relacionadas con sismos se etiquetan con los países mencionados en el corpus del \textit{tweet}. Estos \textit{tweets} son separados en distintos flujos de mensajes en base a las etiquetas, es decir, un flujo por cada país. Luego se analizan los flujos asociados a cada país en forma de señales generadas a partir de la velocidad de llegada relativa de los mensajes. 
+\item[Palabras clave de sismos:] Señal que representa la velocidad de llegada relativa de los mensajes que contienen algún elemento en $\mathcal{K}$, donde $\mathcal{K}$ corresponde a la lista de palabras clave de sismos.
+ 
+\item[Geolocalización a partir del texto:] Los \textit{tweets} seleccionados usando las palabras clave de sismos y que además mencionan algún país en el texto del \textit{tweet} son etiquetados utilizando el nombre de cada país. Estos \textit{tweets} son separados en distintos flujos de mensajes en base a las etiquetas, es decir, un flujo por cada país. Luego se calcula la velocidad de llegada relativa de los mensajes en cada flujo y la secuencia de velocidades relativas se analiza en forma de señal para detectar ráfagas.
+
 \item[Geolocalización a partir del perfil del usuario:] Creado de manera similar a las señales de \textit{geolocalización a partir del texto}, con la diferencia que las etiquetas de localidades son extraídas desde el perfil del usuario.
-\item[Idioma:] Creado de manera similar a las señales de \textit{geolocalización a partir del texto y del perfil del usuario}, con la diferencia que las etiquetas corresponden a los idiomas utilizados en el corpus del \textit{tweet}. Los diferentes flujos son analizados de la misma forma, generando señales representando la velocidad de llegada relativa de los mensajes. 
+
+\item[Idioma:] Creado de manera similar a las señales de \textit{geolocalización a partir del texto y del perfil del usuario}, con la diferencia que las etiquetas corresponden a los idiomas utilizados para escribir el texto del \textit{tweet}. Los diferentes flujos son analizados de la misma forma, generando señales representando la velocidad de llegada relativa de los mensajes. 
+
 \item[Sentimiento:] Los \textit{tweets} seleccionados usando las palabras clave relacionadas con sismos son analizados para detectar si corresponden a un mensaje con sentimiento positivo o negativo. El análisis de sentimiento se describe con más detalle en la sección \ref{sec:sentimiento}. Los \textit{tweets} etiquetados se separan en dos flujos, un flujo con los mensajes con polaridad positiva y otro con los mensajes con polaridad negativa. Luego se analizan las señales generadas calculando la velocidad de llegada relativa de los \textit{tweets} que componen cada flujo.
 
 \end{description}
 
 \subsection{Metodología de evaluación}
 
-La evaluación se realizó intentando satisfacer los criterios utilizados en los trabajos previos con los cuales se desea comparar el sistema~\cite{sakaki2010earthquake,avvenuti2014ears,robinson2013sensitive,earle2012twitter}. Se replicaron los experimentos usando el conjuntos de datos de \textit{Twitter} descrito previamente y los datos utilizados como \textit{ground truth}, los cuales son equivalentes a los utilizados en las evaluaciones de los trabajos previos. Sin embargo no fue factible replicar los otros sistemas para compararlos utilizando exactamente los mismos datos. Esto se debe principalmente a que no tenemos acceso al código fuente, modelos ni detalles de implementación de esos sistemas. Así como también debido a los altos costos asociados a los enfoques supervisados (es decir, etiquetado de datos y parametrización), que se describen en el capítulo \ref{cap:marco}. Por lo tanto, se reportan los resultados y luego se comparan de la forma más cercana posible a los resultados reportados por sistemas similares.
+La evaluación se realizó intentando satisfacer los criterios utilizados en los estudios que conforman el estado del arte con los cuales se desea comparar el sistema~\cite{sakaki2010earthquake,avvenuti2014ears,robinson2013sensitive,earle2012twitter}. Se replicaron los experimentos usando el conjuntos de datos de \textit{Twitter} descrito previamente y los datos utilizados como \textit{ground truth}, los cuales son equivalentes a los utilizados en las evaluaciones de otros estudios. Sin embargo no fue factible replicar los otros sistemas para compararlos utilizando exactamente los mismos datos. Esto se debe principalmente a que no tenemos acceso al código fuente, modelos ni detalles de implementación de esos sistemas. Debido a los altos costos asociados a los enfoques supervisados (es decir, etiquetado de datos y parametrización), que se describen en el capítulo \ref{cap:marco}. Por lo tanto, se reportan los resultados y luego se comparan de la forma más cercana posible a los resultados reportados por sistemas similares.
 
-Sin embargo, hay algunas consideraciones relacionadas al uso de los catálogos de sismos utilizados como \textit{ground truth} en los sistemas basados en datos sociales:
+Hay algunas consideraciones relacionadas al uso de los catálogos de sismos utilizados como \textit{ground truth} en los sistemas basados en datos sociales:
 
 \begin{enumerate}
+
 \item  \textit{No todos los sismos en un catálogo fueron percibidos por las personas}. Por lo tanto, cualquier sistema que dependa de los \textit{sensores sociales o ciudadanos} puede potencialmente detectar sólo  un subconjunto de sismos que fueron efectivamente percibidos por humanos. Idealmente, un \textit{ground thruth} perfecto para sistemas basados en datos sociales debería considerar únicamente los sismos que fueron percibidos por personas. 
+
 \item \textit{No todos los sismos en un catalogo que fueron sentidos por personas están etiquetados oficialmente como ``sismos sensibles''}. Esta discrepancia ocurre cuando las personas encargadas de reportar oficialmente la intensidad del sismo no advierten el suceso (principalmente durante sismos de baja intensidad). Idealmente, un \textit{ground truth} perfecto debería tener todos los sismos percibidos etiquetados como \textit{sismos sensibles}. 
-\item \textit{Los catálogos de sismos con magnitud inferior a 4.0 de las agencias sismológicas no están siempre completas (no tienen \textit{recall} perfecto}. Los reportes de sismos están basados en detecciones realizadas por múltiples sensores sismográficos que componen una red. Sin embargo, si un sismo ocurre en un área sin sismógrafos o con una baja densidad de sensores, estos no son reportados. Esto se refiere a la integridad el catálogo y también se discute en \cite{earle2010omg}. 
+
+\item \textit{Los catálogos de sismos con magnitud inferior a 4.0 de las agencias sismológicas no están siempre completas (no tienen \textit{recall} perfecto)}. Los reportes de sismos están basados en detecciones realizadas por múltiples sensores sismográficos que componen una red. Sin embargo, si un sismo ocurre en un área sin sismógrafos o con una baja densidad de sensores, estos no son reportados. Esto se refiere a la integridad el catálogo y también se discute en \cite{earle2010omg}. 
 \end{enumerate}
 
 \begin{table*}[!h]
@@ -197,7 +204,7 @@ Para lidiar con estas limitaciones y en un intento de proveer resultados compara
 
 \item[Super-estricto] Esta evaluación considera como \textit{ground truth} únicamente a los sismos listados en los catálogos global y local que han sido reportados como ``sismos sensibles'' (un criterio similar es utilizado por Sakaki et al.~\cite{sakaki2013tweet} y Avvenuti et al.~\cite{avvenuti2014earthquake,avvenuti2014ears}).
 
-\item[Moderado] Esta evaluación considera como \textit{ground truth} a los ``sismos sensibles'' (al igual que el criterio super-estricto) y además cualquier sismo detectado por el sistema basado el redes sociales si, y solo si, este coincide con un sismo ``no sensible'' listado en los catálogos de sismos. En este criterio, que es más flexible, se asume que si los usuarios de Twitter comentan acerca de un sismo, y al mismo tiempo los sismógrafos detectan un sismo, entonces el sismo puede ser considerado como un sismo que efectivamente ocurrió.
+\item[Moderado] Esta evaluación considera como \textit{ground truth} a los ``sismos sensibles'' (al igual que el criterio super-estricto) y además cualquier sismo detectado por el sistema basado el redes sociales si, y sólo si, este coincide con un sismo ``no sensible'' listado en los catálogos de sismos. En este criterio, que es más flexible, se asume que si los usuarios de Twitter comentan acerca de un sismo, y al mismo tiempo los sismógrafos detectan un sismo, entonces el sismo puede ser considerado como un sismo que efectivamente ocurrió.
 
 \end{description} 
 
@@ -331,7 +338,7 @@ Las tablas~\ref{table:global-strict}, \ref{table:local-strict}, \ref{table:super
 Los resultados, al igual que en otras evaluaciones, fueron divididos por alcance {\em local} o {\em global}, y por magnitud $\geq 4,0$ y $< 4,0$. Las evaluaciones usando los criterios {\em super-estricto} y {\em moderado} sólo se pudieron realizar usando el catálogo que provee el GUC, porque la clasificación de ``sismos sensibles'' sólo está disponible para este catálogo.
 
 
-En general, los mejores resultados se alcanzan utilizando la señal creada a partir del flujo de mensajes que contienen palabras clave. Según la evaluación moderada, reportada en la tabla ~\ref{table:moderate}, el sistema tiene Precisión$=1.00$, Recall$=0.93$ y F-measure$=0.96$ para sismos $qeq$ 4,0. 
+En general, los mejores resultados se alcanzan utilizando la señal creada a partir del flujo de mensajes que contienen palabras clave. Según la evaluación moderada, reportada en la tabla ~\ref{table:moderate}, el sistema tiene Precisión$=1.00$, Recall$=0.93$ y F-measure$=0.96$ para sismos $geq$ 4,0. 
 Además, se observa que las señales que consideran menciones de países en el texto del tweet ({\em Geolocalización a partir del texto}) y en el perfil del usuario ({\em Geolocalización a partir del perfil del usuario}) también tienen buenos resultados entregando información para la detección de eventos, como se observa en las tablas~\ref{table:global-strict}, \ref{table:local-strict}, \ref{table:super-strict} and \ref{table:moderate}.
 En la práctica, estas tres señales son utilizadas juntas para detectar y localizar un evento. Primero, la detección es efectuada usando la señal de palabras clave y luego la localidad es identificada observando la señal más anómala (país más anómalo) dentro del conjunto de señales de geolocalización a partir del texto del \textit{tweet}.
 
@@ -342,12 +349,12 @@ Por otro lado, las señales asociadas al sentimiento positivo y negativo del \te
 
 \subsection{Comparación de Alcance Global}
 
-Primero, se compara el método propuesto en esta tesis con el método no supervisado propuesto por Earle et al.~\cite{earle2010omg,earle2012twitter} que tiene un alcance global. En su evaluación, Earle et al. usa el criterio ``estricto global'' y el catálogo de la USGS como {\em ground truth} para la validación de resultados. Ellos obtienen valores de precisión de $0.94$, {\em recall} de $0.01$ y {\em f-measure} de $0.02$. Usando el mismo criterio sobre el catálogo de la USGS, el sistema que aquí se propone, mejora el rendimiento obteniendo precisión de $0.95$, {\em recall} de $0.75$ y {\em f-measure}  de $0.84$, para sismos de magnitud $\geq 4.0$. Además, utilizando las señales formadas a partir del {\em país del usuario}, se obtuvo precisión de $0,95$, {\em recall} de $0,81$ y {\em f-measure} de $0,88$, superando incluso los resultados obtenidos por la señal única compuesta por \textit{tweets} con {\em palabras clave}. Para sismos $<4.0$, el sistema tiene precisión de $0,58$, {\em recall} de $0,18$ y {\em f-measure}  de $0,27$ utilizando la señal compuesta por \textit{tweets} con {\em palabras clave}; y precisión de $0,54$, {\em recall} de $0,79$ y {\em f-measure} de $0,65$ utilizando las señales compuestas en base a la información del {\em país del usuario}. Estos resultados se muestran en la tabla ~\ref{table:global-strict}.
+Primero, se compara el método propuesto en esta tesis con el método no supervisado propuesto por Earle et al.~\cite{earle2010omg,earle2012twitter} que tiene un alcance global. En su evaluación, Earle et al. usan el criterio ``estricto global'' y el catálogo de la USGS como {\em ground truth} para la validación de resultados. Ellos obtienen valores de precisión de $0.94$, {\em recall} de $0.01$ y {\em f-measure} de $0.02$. Usando el mismo criterio sobre el catálogo de la USGS, el sistema que aquí se propone, mejora el rendimiento obteniendo precisión de $0.95$, {\em recall} de $0.75$ y {\em f-measure}  de $0.84$, para sismos de magnitud $\geq 4.0$. Además, utilizando las señales formadas a partir del {\em país del usuario}, se obtuvo precisión de $0,95$, {\em recall} de $0,81$ y {\em f-measure} de $0,88$, superando incluso los resultados obtenidos por la señal única compuesta por \textit{tweets} con {\em palabras clave}. Para sismos $<4.0$, el sistema tiene precisión de $0,58$, {\em recall} de $0,18$ y {\em f-measure}  de $0,27$ utilizando la señal compuesta por \textit{tweets} con {\em palabras clave}; y precisión de $0,54$, {\em recall} de $0,79$ y {\em f-measure} de $0,65$ utilizando las señales compuestas en base a la información del {\em país del usuario}. Estos resultados se muestran en la tabla ~\ref{table:global-strict}.
 
 
 \subsection{Comparación de Alcance Local}
 
-Después, se compara el método propuesto con los métodos supervisados propuestos por Avvenuti et al.~\cite{avvenuti2014earthquake,avvenuti2014ears}, Sakaki et al.~\cite{sakaki2013tweet,sakaki2010earthquake} y por los investigadores de CSIRO Australia~\cite{yin2012using,robinson2013sensitive}.
+Se compara el método propuesto con los métodos supervisados propuestos por Avvenuti et al.~\cite{avvenuti2014earthquake,avvenuti2014ears}, Sakaki et al.~\cite{sakaki2013tweet,sakaki2010earthquake} y por los investigadores de CSIRO Australia~\cite{yin2012using,robinson2013sensitive}.
 %
 Los resultados se resumen en la tabla~\ref{table:other-methods}. 
 %
@@ -396,7 +403,9 @@ En el \nameref{anexo:evaluacionpaises} se listan los resultados obtenidos para d
  
 \subsection{Falsos Positivos}
 
-Los falsos positivos son poco comunes, algunos ejemplos de detecciones que resultaron ser falsas fueron, durante un concierto de una banda de Pop Coreana en donde muchos usuarios \textit{twittearon} que estaban ``temblando de emoción'', y algunas otras ocasiones, durante simulacros de sismos de carácter masivo. Ambos casos crearon anomalías colectivas en el uso de algunas de las palabras clave y dentro de un rango geográfico específico. En la sección \ref{sec:casosfalsos} se presenta un ejemplo de detección falsa ocasionada por un simulacro de sismo masivo realizado en las islas Filipinas. 
+Las detecciones falsas positivas son poco comunes. Uno de los casos que resultó ser falso ocurrió durante un concierto de una banda de Pop Coreana en donde muchos usuarios \textit{twittearon} que estaban ``temblando de emoción''. Algunos otros casos interesantes ocurrieron durante simulacros de sismo de carácter masivo. 
+
+Estos casos crearon anomalías colectivas en el uso de algunas de las palabras clave y dentro de un rango geográfico específico. En la sección \ref{sec:casosfalsos} se presenta un ejemplo de detección falsa ocasionada por un simulacro de sismo masivo realizado en las islas Filipinas. 
 
 \section{Conclusión de la evaluación}
 \label{sec:conclusionEval}
