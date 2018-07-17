@@ -41,7 +41,7 @@
 
 %% Lenguaje
 \addto\captionsspanish{\renewcommand\tablename{Tabla}}
-\addto\captionsspanish{\renewcommand\contentsname{Tabla de Contenidos}}
+\addto\captionsspanish{\renewcommand\contentsname{Tabla de Contenido}}
 \addto\captionsspanish{\renewcommand\listtablename{Índice de Tablas}}
 \addto\captionsspanish{\renewcommand\listfigurename{Índice de Ilustraciones}}
 
@@ -61,17 +61,18 @@
 %% Entornos nuevos
 \newenvironment{abstract}{%
 \cleardoublepage
-\begin{flushright}
-\small
-\begin{tabular}{l}
-RESUMEN DE LA MEMORIA PARA OPTAR \\
-AL TÍTULO DE \MakeUppercase\@carrera \\
-POR: \MakeUppercase\@author \\
-FECHA: \MakeUppercase\@date\\
-PROF. GUÍA: SR. \MakeUppercase\@guia \\
-\end{tabular}
-\end{flushright}
+%\begin{flushright}
+%\small
+%\begin{tabular}{l}
+%RESUMEN DE LA MEMORIA PARA OPTAR \\
+%AL TÍTULO DE \MakeUppercase\@carrera \\
+%POR: \MakeUppercase\@author \\
+%FECHA: \MakeUppercase\@date\\
+%PROF. GUÍA: SR. \MakeUppercase\@guia \\
+%\end{tabular}
+%\end{flushright}
 \begin{center}
+\section*{Resumen}
 \MakeUppercase\@title
 \end{center}
 }{\vfill\null}

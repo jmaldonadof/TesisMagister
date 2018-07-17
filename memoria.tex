@@ -3,11 +3,11 @@
 \author{JAZMINE ALEJANDRA MALDONADO FLORES}
 \title{Detección de sismos y visualización en tiempo real usando usuarios de Twitter como "Sensores Sociales"}
 \auspicio{}
-\date{MARZO 2018}
-\guia{Bárbara Poblete}
+\date{2018}
+\guia{Bárbara Poblete Labra}
 \carrera{MAGÍSTER EN CIENCIAS, MENCIÓN COMPUTACIÓN}
 \memoria{TESIS PARA OPTAR AL GRADO DE}
-\comision{\ }{\ }{\ }
+\comision{Jose Benguria Donoso}{Benjamin Bustos Cardenas}{Mauricio Marin Caihuan}
 
 \usepackage{lipsum}
 
@@ -43,8 +43,9 @@
 \maketitle
 
 \begin{abstract}
+
 En este trabajo de tesis se propone un algoritmo y un sistema computacional que, basado en la extracción de mensajes publicados por los usuarios en Twitter, es capaz de detectar sismos que ocurren en el mundo en tiempo real. Las detecciones se generan en base a la monitorización de mensajes escritos en cualquier idioma y publicados desde cualquier país. El enfoque utilizado no es supervisado y se adapta automáticamente a los cambios en la entrada de datos. Para funcionar sólo requiere una lista de palabras en múltiples lenguajes, en este caso, la lista se compone por palabras relacionadas con sismos. 
-El método que se propone para detectar sismos es simple y tiene una alta tolerancia al ruido de los datos.  Además, el sistema tiene buenos resultados tanto en términos de precisión como de \textit{recall.} 
+El método que se propone para detectar sismos es simple y tiene una alta tolerancia al ruido de los datos.  Además, el sistema tiene buenos resultados tanto en términos de precisión como de \textit{recall}. 
 
 Este trabajo complementa los trabajos previos que conforman el estado del arte en esta materia, puesto que éstos, en su mayoría corresponden a sistemas supervisados que implican costos de etiquetado de datos y entrenamiento. Además, los otros estudios utilizan enfoques que detectan sismos en áreas geográficas delimitadas o para idiomas específicos, añadiendo filtros estrictos para reducir el ruido y haciendo difícil su adaptación a un enfoque internacional. En este documento se presenta una evaluación cuantitativa de las detecciones realizadas en un período de 9 meses, mostrando que la solución propuesta es competitiva respecto a los mejores métodos propuestos en el estado del arte. 
 
@@ -81,10 +82,20 @@ Durante el período de trabajo de esta tesis se publicó un artículo en la conf
 \input{05_conclusion.tex}
 
 \bibliographystyle{plain}
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliografía}
 \bibliography{bibliografia}
 
+\phantomsection
+\addcontentsline{toc}{chapter}{Anexo A: Evaluación por País del Sistema de Detección de Sismos}
 \input{06_anexo.tex} % evaluación por países
+
+\phantomsection
+\addcontentsline{toc}{chapter}{Anexo B: Publicación en HCOMP 2017}
 \input{07_anexo.tex} % paper HCOMP 2017
+
+\phantomsection
+\addcontentsline{toc}{chapter}{Anexo C: Menciones en la prensa}
 \input{08_anexo.tex} % menciones en la prensa
 %\input{09_anexo.tex} % especificación de la base de datos
 
